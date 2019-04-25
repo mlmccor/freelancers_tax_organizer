@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :employers
   resources :sessions
 
+  post '/sessions/new', to: "sessions#create"
+
   resources :tax_years do
     resources :checks
     resources :employers

@@ -1,1 +1,8 @@
-Login Form
+<%= form_tag do %>
+  <%= render 'flash_messages' %>
+  <%= label_tag(:email, "Email:") %>
+  <%= text_field_tag(:email) %>
+  <%= label_tag(:password, "Password:") %>
+  <%= password_field_tag(:password) %>
+  <%= submit_tag('login')%>
+<% end %>
