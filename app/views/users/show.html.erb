@@ -1,1 +1,4 @@
-Dropdown list of Tax Years
+<h1>Please Select Year You Would Like To View</h1>
+<% @user.tax_years.each do |tax_year| %>
+  <h4><%= link_to tax_year.year, tax_year_path(tax_year) %></h4>
+<% end %>

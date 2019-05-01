@@ -1,2 +1,13 @@
-New Check form
-with employer dropdown list and new employer field
+<%= form_for(@check, url: tax_year_checks_path) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.label :amount %>
+  <%= f.number_field :amount %><br>
+  <%= f.label :mileage %>
+  <%= f.number_field :mileage %><br>
+  <%= f.label 'Select an Employer' %>
+  <%= f.collection_select :employer_id, @check.tax_year.employers, :id, :name, include_blank: true %><br>
+  <%= f.label 'Or Create a New Employer' %>
+  <%= f.text_field :employer %><br>
+  <%= f.submit %>
+<% end %>

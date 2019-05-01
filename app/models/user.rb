@@ -7,13 +7,21 @@ class User < ApplicationRecord
   has_many :checks, through: :tax_years
   has_many :employers, through: :checks
 
-  def lucrative_employers
+  def current_tax_year
+    TaxYear.find_by(id: self.current_tax_year_id)
+  end
+
+  def current_tax_year=(year)
+    self.current_tax_year_id = year.id
+  end
+
+  def self.lucrative_employers
     self.employers.select do |employer|
       employer.lucrative? == true
     end
   end
 
-  def other_employers
+  def self.other_employers
     self.employers.select do |employer|
       employer.lucrative? == false
     end
