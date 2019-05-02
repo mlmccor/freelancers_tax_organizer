@@ -5,16 +5,5 @@ class Employer < ApplicationRecord
   validates :id, uniqueness: true
 
 
-
-  def lucrative?
-    total = 0
-    self.checks.each do |check|
-      total += check.amount
-    end
-    if total > 600
-      true
-    else
-      false
-    end
-  end
+  
 end

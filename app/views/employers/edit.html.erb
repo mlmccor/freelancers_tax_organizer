@@ -1,0 +1,7 @@
+<%= form_for @employer do |f|%>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.label 'Expecting a Form 1099 from this employer?' %>
+  <%= f.check_box :tax_form %><br>
+  <%= f.submit %>
+<% end %>

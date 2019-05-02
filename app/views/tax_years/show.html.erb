@@ -2,7 +2,7 @@
 <%= link_to "Create a check", new_tax_year_check_path(@tax_year) %>
 
 <% @tax_year.employers.uniq.each do |employer| %>
-  <h4><%= employer.name %></h4>
+  <h4><%= link_to employer.name, edit_tax_year_employer_path(@tax_year) %></h4>
   <table>
     <thead>
       <th>Date Deposited</th><th>Name</th><th>Amount</th>

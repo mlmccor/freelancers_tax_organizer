@@ -15,17 +15,7 @@ class User < ApplicationRecord
     self.current_tax_year_id = year.id
   end
 
-  def self.lucrative_employers
-    self.employers.select do |employer|
-      employer.lucrative? == true
-    end
-  end
 
-  def self.other_employers
-    self.employers.select do |employer|
-      employer.lucrative? == false
-    end
-  end
 
 
 end
