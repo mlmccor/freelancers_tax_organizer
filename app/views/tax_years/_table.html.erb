@@ -1,0 +1,19 @@
+<% employer_collection.each do |employer| %>
+  <h4><%= link_to employer.name, edit_tax_year_employer_path(current_tax_year, employer) %></h4>
+  <table>
+    <thead>
+      <th>Date Deposited</th><th>Name</th><th>Amount</th>
+      <th>Mileage</th>
+    </thead>
+    <tbody>
+      <% employer.checks.each do |check| %>
+      <tr>
+        <td><%=check.created_at.strftime("%m/%d/%Y")%></td>
+        <td><%=check.name%></td>
+        <td>$<%=check.amount%></td>
+        <td><%=check.mileage%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
