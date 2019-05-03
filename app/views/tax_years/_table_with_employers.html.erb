@@ -1,15 +1,15 @@
   <table>
     <thead>
-      <th>Date Deposited</th><th>Name</th><th>Employer Name</th><th>Amount</th>
+      <th>Check Date</th><th>Name</th><th>Employer Name</th><th>Amount</th>
       <th>Mileage</th>
     </thead>
     <tbody>
       <% employer_collection.each do |employer| %>
         <% employer.checks.each do |check| %>
           <tr>
-            <td><%= check.created_at.strftime("%m/%d/%Y") %></td>
-            <td><%= check.name %></td>
-            <td><%= link_to employer.name, employer_path(employer) %></td>
+            <td><%= check.check_date.strftime("%m/%d/%Y") %> </td>
+            <td><%= check.name %> </td>
+            <td><%= link_to employer.name, employer_path(employer)%><%=" "%> </td>
             <td>$<%= check.amount %></td>
             <td><%= check.mileage %></td>
           </tr>

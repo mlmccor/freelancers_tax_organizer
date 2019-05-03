@@ -25,6 +25,6 @@ class ChecksController < ApplicationController
   private
 
   def check_params
-    params.require(:check).permit(:name, :amount, :mileage, :employer_id)
+    params.require(:check).permit(:name, :amount, :mileage, :employer_id, :check_date)
   end
 end
