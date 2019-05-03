@@ -1,9 +1,9 @@
-<h1>Tax Year - <%=@tax_year.user.username %></h1>
+<h1><%=@tax_year.user.username %> - <%=@tax_year.year%> Freelance Income</h1>
 <%= link_to "Create a check", new_tax_year_check_path(@tax_year) %>
 
-<h3>Income from Form 1099's</h3>
+<h2>Income from Form 1099's</h2>
 <%= render partial: 'table', locals: {employer_collection: @tax_year.employers.tax_form.uniq, current_tax_year: @tax_year} %>
 <br><br>
 
-<h3>Income without 1099's</h3>
+<h2>Income without 1099's</h2>
 <%= render partial: 'table_with_employers', locals: {employer_collection: @tax_year.employers.no_form.uniq, current_tax_year: @tax_year} %>

@@ -1,0 +1,25 @@
+<% employer.tax_years.each do |tax_year| %>
+<h4><%= link_to tax_year.year, tax_year_path(tax_year) %></h4>
+<table>
+  <thead>
+    <th>Date Deposited</th><th>Name</th><th>Amount</th>
+    <th>Mileage</th>
+  </thead>
+    <tbody>
+      <% TaxYear.employer_gigs(tax_year, employer).each do |check| %>
+      <tr>
+        <td><%=check.created_at.strftime("%m/%d/%Y")%></td>
+        <td><%=check.name%></td>
+        <td>$<%=check.amount%></td>
+        <td><%=check.mileage%></td>
+      </tr>
+      <% end %>
+      <tr>
+        <td></td>
+        <td>Total</td>
+        <td>$<%= Check.total_amount(TaxYear.employer_gigs(tax_year,employer)) %></td>
+        <td><%= Check.total_mileage(TaxYear.employer_gigs(tax_year,employer)) %></td>
+      </tr>
+    </tbody>
+</table>
+<% end %>

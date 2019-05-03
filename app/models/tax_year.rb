@@ -4,17 +4,12 @@ class TaxYear < ApplicationRecord
   has_many :employers, through: :checks
   validates :year, uniqueness: {scope: :user_id}
 
-  def self.lucrative_employers
-    tax_year.employers.select do |employer|
-      employer.lucrative? == true
+  def self.employer_gigs(tax_year, employer)
+    tax_year.checks.select do |check|
+      check.employer == employer
     end
   end
 
-  def other_employers(tax_year)
-    tax_year.employers.select do |employer|
-      employer.lucrative? == false
-    end
-  end
 
 
 end

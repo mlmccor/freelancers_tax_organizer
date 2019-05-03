@@ -7,13 +7,20 @@
       <% employer_collection.each do |employer| %>
         <% employer.checks.each do |check| %>
           <tr>
-            <td><%=check.created_at.strftime("%m/%d/%Y")%></td>
-            <td><%=check.name%></td>
-            <td><%= link_to employer.name, edit_tax_year_employer_path(current_tax_year, employer) %></td>
-            <td>$<%=check.amount%></td>
-            <td><%=check.mileage%></td>
+            <td><%= check.created_at.strftime("%m/%d/%Y") %></td>
+            <td><%= check.name %></td>
+            <td><%= link_to employer.name, employer_path(employer) %></td>
+            <td>$<%= check.amount %></td>
+            <td><%= check.mileage %></td>
           </tr>
         <% end %>
       <% end %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>Total</td>
+        <td>$<%= Check.other_total_amount(employer_collection) %></td>
+        <td><%= Check.other_total_mileage(employer_collection) %></td>
+      </tr>
     </tbody>
   </table>

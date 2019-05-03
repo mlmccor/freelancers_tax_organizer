@@ -1,9 +1,5 @@
-Employer name:
+<h1><%= @employer.name %></h1>
+<%= link_to 'Edit Employer Info', edit_employer_path(@employer) %>
 
-Tax Year
-List of gigs
-Total
 
-Tax Year
-List of gigs
-Total
+<%= render partial: 'table_with_tax_years', locals: {employer: @employer} %>

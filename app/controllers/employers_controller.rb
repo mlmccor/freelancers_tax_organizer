@@ -1,5 +1,9 @@
 class EmployersController < ApplicationController
 
+  def show
+    @employer = Employer.find_by(id: params[:id])
+  end
+
   def edit
     @employer = Employer.find_by(id: params[:id])
   end
