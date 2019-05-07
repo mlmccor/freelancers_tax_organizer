@@ -2,7 +2,11 @@ class ChecksController < ApplicationController
   def index
   end
 
+  def show
+  end
+
   def new
+    binding.pry
     @check = Check.new
     @check.tax_year = TaxYear.find_by(id: session[:current_tax_year_id])
   end
@@ -19,6 +23,9 @@ class ChecksController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
   end
 
 

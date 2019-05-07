@@ -19,8 +19,8 @@
         <td></td>
         <td></td>
         <td>Total</td>
-        <td>$<%= Check.other_total_amount(employer_collection) %></td>
-        <td><%= Check.other_total_mileage(employer_collection) %></td>
+        <td>$<%=current_tax_year.checks.no_form_checks.total_amount %></td>
+        <td>$<%= current_tax_year.no_form_total_mileage %></td>
       </tr>
     </tbody>
   </table>

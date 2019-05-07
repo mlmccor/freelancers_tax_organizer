@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   private
 
+  
+
   def redirect_unless_logged_in
     redirect_to new_session_path unless logged_in?
   end

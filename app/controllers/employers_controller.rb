@@ -19,6 +19,9 @@ class EmployersController < ApplicationController
     end
   end
 
+  def destroy
+  end
+
   private
 
   def update_params
