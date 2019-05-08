@@ -25,6 +25,16 @@ class ChecksController < ApplicationController
     end
   end
 
+  def edit
+    @check = Check.find_by(id: params[:tax_year_id])
+  end
+
+  def update
+    @check = Check.find_by(id: params[:id])
+    @check.update(check_params)
+    redirect_to tax_year_path(@check.tax_year)
+  end
+
   def destroy
   end
 
