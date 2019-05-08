@@ -2,4 +2,4 @@
 <%= link_to 'Edit Employer Info', edit_employer_path(@employer) %>
 
 
-<%= render partial: 'table_with_tax_years', locals: {employer: @employer} %>
+<%= render partial: 'table_with_tax_years', locals: {tax_years: @employer.tax_years.uniq, employer: @employer} %>

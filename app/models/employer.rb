@@ -8,8 +8,10 @@ class Employer < ApplicationRecord
     where(tax_form: false)
   end
 
-  def self.employer_checks
-    self.map{|employer| employer.checks}.flatten
+  def self.employer_checks(year)
+    checks = []
+    self.all.each {|employer| checks << employer.checks.by_year(year)}
+    checks
   end
 
   def self.no_form_total_amount(current_tax_year)

@@ -7,8 +7,12 @@ class Check < ApplicationRecord
     where(tax_year: year)
   end
 
+  def self.by_employer(employer)
+    where(employer: employer)
+  end
+
   def self.total_amount
-    sum(:amount)
+    sum(&:amount)
   end
 
   def self.other_total_amount
@@ -17,7 +21,7 @@ class Check < ApplicationRecord
   end
 
   def self.total_mileage
-    sum(:mileage)
+    sum(&:mileage)
   end
 
   def self.other_total_mileage(employer_collection)
