@@ -20,6 +20,9 @@ class EmployersController < ApplicationController
   end
 
   def destroy
+    @employer = Employer.find_by(id: params[:id])
+    @employer.destroy
+    redirect_to tax_year_path(id: session[:current_tax_year_id])
   end
 
   private

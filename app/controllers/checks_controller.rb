@@ -35,6 +35,7 @@ class ChecksController < ApplicationController
       redirect_to tax_year_path(@check.tax_year)
     else
       render :edit
+    end
   end
 
   def destroy

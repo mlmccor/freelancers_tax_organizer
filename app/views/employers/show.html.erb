@@ -3,3 +3,6 @@
 
 
 <%= render partial: 'table_with_tax_years', locals: {tax_years: @employer.tax_years.uniq, employer: @employer} %>
+<br><br>
+
+<%= button_to "Delete Employer", employer_path(:id => @employer.id), :method => :delete %>
