@@ -36,6 +36,10 @@ class ChecksController < ApplicationController
   end
 
   def destroy
+    @check = Check.find_by(id: params[:id])
+    @tax_year = @check.tax_year
+    @check.destroy
+    redirect_to tax_year_path(@tax_year)
   end
 
 

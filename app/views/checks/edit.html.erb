@@ -10,8 +10,11 @@
   <%= f.label 'Select an Employer' %>
   <%= f.collection_select :employer_id, @check.tax_year.employers.uniq, :id, :name, include_blank: true %><br>
   <% if !@check.employer %>
-  <%= f.label 'Or Create a New Employer' %>
-  <%= f.text_field :employer %><br>
+    <%= f.label 'Or Create a New Employer' %>
+    <%= f.text_field :employer %><br>
   <% end %>
   <%= f.submit %>
 <% end %>
+<br><br>
+
+<%= button_to "Delete Check", tax_year_check_path(:id => @check.id), tax_year_id: @check.tax_year, :method => :delete %>

@@ -2,3 +2,6 @@
 <% @user.tax_years.each do |tax_year| %>
   <h4><%= link_to tax_year.year, tax_year_path(tax_year) %></h4>
 <% end %>
+<br><br>
+
+<%= button_to "delete", user_path(:id => @user.id), :method => :delete %>
