@@ -1,6 +1,6 @@
-<% if @user.errors %>
-  <% @user.errors.full_messages.each do |msg| %>
-      <ul>
+<% if object.errors %>
+  <% object.errors.full_messages.each do |msg| %>
+      <ul class= 'fields_with_errors'>
         <%= msg %>
       </ul>
 

@@ -1,3 +1,6 @@
+<%= render partial: 'users/errors', locals: {object: @check} %>
+
+
 <%= form_for(@check, url: tax_year_checks_path) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br>

@@ -2,6 +2,10 @@ class Check < ApplicationRecord
   belongs_to :user
   belongs_to :tax_year
   belongs_to :employer
+  validates :check_date, presence: true
+  validates :name, presence: true
+  validates :amount, presence: true
+  validates :mileage, presence: true
 
   def self.by_year(year)
     where(tax_year: year)

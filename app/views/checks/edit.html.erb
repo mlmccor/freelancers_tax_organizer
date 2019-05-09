@@ -1,4 +1,7 @@
-<%= form_for(@check, url: tax_year_checks_path) do |f| %>
+<%= render partial: 'users/errors', locals: {object: @check}  %>
+
+
+<%= form_for(@check, url: tax_year_check_path(@check)) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br>
   <%= f.label 'Date on Check'%>

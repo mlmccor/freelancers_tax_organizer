@@ -3,6 +3,7 @@ class Employer < ApplicationRecord
   has_many :checks
   has_many :tax_years, through: :checks
   scope :tax_form, -> { where(tax_form: true)}
+  validates :name, presence: true
 
   def self.no_form
     where(tax_form: false)
