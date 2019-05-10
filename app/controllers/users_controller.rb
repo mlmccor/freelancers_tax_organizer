@@ -2,7 +2,10 @@ class UsersController < ApplicationController
   before_action :redirect_unless_logged_in, only: [:show, :update]
 
   def show
-    @user = User.find_by(id: session[:user_id])
+    @user = User.find_by(id: params[:id])
+    if !@user == current_user
+      redirect_to new_session_path
+    end
   end
 
   def new
@@ -21,8 +24,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    binding.pry
-    current_user.update(update_params)
+    current_user.update(user_params)
   end
 
   def destroy
@@ -40,10 +42,8 @@ class UsersController < ApplicationController
 
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :current_tax_year)
+    params.require(:user).permit(:username, :email, :password)
   end
 
-  def update_params
-    params.require(:user).permit(:current_tax_year)
-  end
+
 end

@@ -1,0 +1,16 @@
+<%= f.label :name %>
+<%= f.text_field :name %><br>
+<%= f.label 'Date on Check'%>
+<%= f.date_field :check_date%><br>
+<%= f.label :amount %>
+<%= f.number_field :amount, class: :text_field, step: :any %><br>
+<%= f.label 'Miles Driven (Round-Trip)' %>
+<%= f.number_field :mileage %><br>
+<%= f.label 'Select an Employer' %>
+<%= f.collection_select :employer_id, @check.tax_year.employers.uniq, :id, :name, include_blank: true %><br>
+<% if !@check.employer %>
+<%= f.fields_for :employer do |em| %>
+  <%= em.label 'Or Name of a New Employer' %>
+  <%= em.text_field :name %><br>
+<% end %>
+<%= f.submit %>

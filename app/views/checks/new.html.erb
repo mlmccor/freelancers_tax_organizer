@@ -1,18 +1,22 @@
 <%= render partial: 'users/errors', locals: {object: @check} %>
 
 
-<%= form_for(@check, url: tax_year_checks_path) do |f| %>
+<%= form_for @check, url: tax_year_checks_path do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br>
   <%= f.label 'Date on Check'%>
   <%= f.date_field :check_date%><br>
   <%= f.label :amount %>
   <%= f.number_field :amount, class: :text_field, step: :any %><br>
-  <%= f.label :mileage %>
+  <%= f.label 'Miles Driven (Round-Trip)' %>
   <%= f.number_field :mileage %><br>
   <%= f.label 'Select an Employer' %>
   <%= f.collection_select :employer_id, @check.tax_year.employers.uniq, :id, :name, include_blank: true %><br>
-  <%= f.label 'Or Create a New Employer' %>
-  <%= f.text_field :employer %><br>
+  <% if !@check.employer %>
+    <%= f.fields_for :employer_attributes do |em| %>
+      <%= em.label 'Or Name of a New Employer' %>
+      <%= em.text_field :name %><br>
+    <% end %>
+  <% end %>
   <%= f.submit %>
 <% end %>

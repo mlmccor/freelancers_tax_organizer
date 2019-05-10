@@ -6,7 +6,6 @@ class ChecksController < ApplicationController
   end
 
   def new
-    binding.pry
     @check = Check.new
     @check.tax_year = TaxYear.find_by(id: session[:current_tax_year_id])
   end
@@ -49,6 +48,6 @@ class ChecksController < ApplicationController
   private
 
   def check_params
-    params.require(:check).permit(:name, :amount, :mileage, :employer_id, :check_date)
+    params.require(:check).permit(:name, :amount, :mileage, :employer_id, :check_date, employer_attributes: [:name])
   end
 end

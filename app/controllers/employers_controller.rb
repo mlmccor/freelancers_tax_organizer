@@ -2,6 +2,9 @@ class EmployersController < ApplicationController
 
   def show
     @employer = Employer.find_by(id: params[:id])
+    if !current_user = @employer.user
+      redirect_to new_session_path
+    end
   end
 
   def edit

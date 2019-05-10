@@ -6,6 +6,7 @@ class Check < ApplicationRecord
   validates :name, presence: true
   validates :amount, presence: true
   validates :mileage, presence: true
+  accepts_nested_attributes_for :employer_attributes
 
   def self.by_year(year)
     where(tax_year: year)
@@ -28,10 +29,6 @@ class Check < ApplicationRecord
     sum(&:mileage)
   end
 
-  def self.other_total_mileage(employer_collection)
-    total = 0
-    Check.total_mileage(employer_collection.map {|employer| employer.checks }.flatten)
-  end
 
 
 end
