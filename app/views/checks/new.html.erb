@@ -13,10 +13,8 @@
   <%= f.label 'Select an Employer' %>
   <%= f.collection_select :employer_id, @check.tax_year.employers.uniq, :id, :name, include_blank: true %><br>
   <% if !@check.employer %>
-    <%= f.fields_for :employer_attributes do |em| %>
-      <%= em.label 'Or Name of a New Employer' %>
-      <%= em.text_field :name %><br>
-    <% end %>
+    <%= f.label 'Or Write the Name of a New One' %>
+    <%= f.text_field :employer %><br>
   <% end %>
   <%= f.submit %>
 <% end %>

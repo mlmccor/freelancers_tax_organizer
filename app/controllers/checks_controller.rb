@@ -11,8 +11,9 @@ class ChecksController < ApplicationController
   end
 
   def create
+    binding.pry
     @check = Check.new(check_params)
-    @check.tax_year = TaxYear.find_by(id: session[:current_tax_year_id])
+    @check.tax_year = TaxYear.find_by(id: params[:tax_year_id])
     @check.user = User.find_by(id: session[:user_id])
     if !params[:check][:employer].empty?
       @check.employer = Employer.find_or_create_by(name: params[:check][:employer], user: User.find(session[:user_id]))

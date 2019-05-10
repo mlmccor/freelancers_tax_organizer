@@ -26,13 +26,17 @@ gem 'jbuilder', '~> 2.5'
 #Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'pry'
+gem 'pry-rails'
 
 gem 'pg'
 
 gem 'omniauth'
 
 gem 'omniauth-facebook'
+
+gem 'bootstrap', '~> 4.3.1'
+
+gem 'dotenv-rails'
 
 
 
@@ -43,7 +47,6 @@ gem 'omniauth-facebook'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'foreman'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
