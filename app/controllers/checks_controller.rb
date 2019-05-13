@@ -11,7 +11,6 @@ class ChecksController < ApplicationController
   end
 
   def create
-    binding.pry
     @check = Check.new(check_params)
     @check.tax_year = TaxYear.find_by(id: params[:tax_year_id])
     @check.user = User.find_by(id: session[:user_id])

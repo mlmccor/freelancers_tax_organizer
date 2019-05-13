@@ -8,10 +8,17 @@ class SessionsController < ApplicationController
 
   def create
     if auth
-      binding.pry
-      @user = User.find_or_create_by(uid: auth['uid']) do |u|
+      @user = User.find_or_create_by(email: auth['info']['email']) do |u|
         u.username = auth['info']['name']
-        u.email = auth['info']['email']
+        u.password = SecureRandom.urlsafe_base64(n=6)
+      end
+      binding.pry
+      if @user.save
+        session[:user_id] = @user.id
+        @user.tax_years.find_or_create_by(year: DateTime.now.year)
+        redirect_to user_path(@user)
+      else
+        redirect_to '/'
       end
     else
       @user = User.find_by(email: params[:email])
