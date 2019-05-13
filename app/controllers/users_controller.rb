@@ -28,7 +28,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    binding.pry
     @user = User.find_by(id: session[:user_id])
     session.clear
     @user.destroy

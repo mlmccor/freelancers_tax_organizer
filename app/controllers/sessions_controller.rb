@@ -12,7 +12,6 @@ class SessionsController < ApplicationController
         u.username = auth['info']['name']
         u.password = SecureRandom.urlsafe_base64(n=6)
       end
-      binding.pry
       if @user.save
         session[:user_id] = @user.id
         @user.tax_years.find_or_create_by(year: DateTime.now.year)
