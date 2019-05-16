@@ -2,7 +2,9 @@
 <%= link_to "Create a check", new_tax_year_check_path(@tax_year) %>
 
 <h2>Income from Form 1099's</h2>
-<%= render partial: 'table', locals: {employer_collection: @tax_year.employers.tax_form.uniq, current_tax_year: @tax_year} %>
+<div class="table-center">
+  <%= render partial: 'table', locals: {employer_collection: @tax_year.employers.tax_form.uniq, current_tax_year: @tax_year} %>
+</div>
 <br><br>
 
 <h2>Income without 1099's</h2>

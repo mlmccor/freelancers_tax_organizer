@@ -1,26 +1,28 @@
 <% employer_collection.each do |employer| %>
-  <h4><%= link_to employer.name, tax_year_employer_path(current_tax_year, employer) %></h4>
-  <table>
-    <thead>
-      <th>Check Date</th><th>Name</th><th>Amount</th>
-      <th>Mileage</th>
-    </thead>
-    <tbody>
-      <% employer.checks.by_year(current_tax_year).each do |check| %>
-      <tr>
-        <td><%= check.check_date.strftime("%m/%d/%Y") %></td>
-        <td><%= link_to check.name, edit_tax_year_check_path(check)%></td>
-        <td>$<%=check.amount%></td>
-        <td><%=check.mileage%></td>
-      </tr>
-      <% end %>
-      <tr>
-        <td></td>
-        <td>Total</td>
-        <td>$<%= employer.checks.by_year(current_tax_year).total_amount %></td>
-        <td><%= employer.checks.by_year(current_tax_year).total_mileage %></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class= "bold text-left"><%= link_to employer.name, tax_year_employer_path(current_tax_year, employer) %></div>
+  <div class="">
+    <table>
+      <thead>
+        <th>Check Date</th><th>Name</th><th>Amount</th>
+        <th>Mileage</th>
+      </thead>
+      <tbody>
+        <% employer.checks.by_year(current_tax_year).each do |check| %>
+        <tr>
+          <td><%= check.check_date.strftime("%m/%d/%Y") %></td>
+          <td><%= link_to check.name, edit_tax_year_check_path(check)%></td>
+          <td>$<%=check.amount%></td>
+          <td><%=check.mileage%></td>
+        </tr>
+        <% end %>
+        <tr>
+          <td></td>
+          <td>Total</td>
+          <td>$<%= employer.checks.by_year(current_tax_year).total_amount %></td>
+          <td><%= employer.checks.by_year(current_tax_year).total_mileage %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <br><br>
   <% end %>
