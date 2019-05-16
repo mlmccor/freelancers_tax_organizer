@@ -10,9 +10,16 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+
+ 
+ @import "bootstrap";
+
+ /*!
+  * Start Bootstrap - Scrolling Nav (https://startbootstrap.com/template-overviews/scrolling-nav)
+  * Copyright 2013-2019 Start Bootstrap
+  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-scrolling-nav/blob/master/LICENSE)
+  */
  header {
    padding: 156px 0 100px;
  }
