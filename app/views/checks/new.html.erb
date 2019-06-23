@@ -1,4 +1,6 @@
 <%= render partial: 'users/errors', locals: {object: @check} %>
+<%= content_tag :div, class: "id", data: {temp: @check.tax_year.id} do %>
+<% end %>
 
 
 <%= form_for @check, url: tax_year_checks_path do |f| %>
@@ -29,16 +31,16 @@
   <p id="checkEmployer"></p>
 </div>
 
-  
+
 </script>
 <script type="text/javascript" charset="utf-8">
   $(function () {
-
+    let id = $('.id').data('temp')
     $('form').submit(function(event) {
       event.preventDefault();
+      console.log(id)
       var values = $(this).serialize()
-      debugger
-      var posting = $.post('/checks', values)
+      var posting = $.post(`/tax_years/${id}/checks`, values)
       posting.done(function(data) {
         var check = data
         $('#checkName').text(check['name'])
