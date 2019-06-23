@@ -1,29 +1,33 @@
-<%= render partial: 'users/errors', locals: {object: @check} %>
-<%= content_tag :div, class: "id", data: {temp: @check.tax_year.id} do %>
-<% end %>
+<% if @check.id %>
+<% else %>
 
-
-<%= form_for @check, url: tax_year_checks_path do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %><br>
-  <%= f.label 'Date on Check'%>
-  <%= f.date_field :check_date%><br>
-  <%= f.label :amount %>
-  <%= f.number_field :amount, class: :text_field, step: :any %><br>
-  <%= f.label 'Miles Driven (Round-Trip)' %>
-  <%= f.number_field :mileage %><br>
-  <%= f.label 'Select an Employer' %>
-  <%= f.collection_select :employer_id, @check.tax_year.employers.uniq, :id, :name, include_blank: true %><br>
-  <% if !@check.employer %>
-    <%= f.label 'Or Write the Name of a New One' %>
-    <%= f.text_field :employer %><br>
+  <%= render partial: 'users/errors', locals: {object: @check} %>
+  <%= content_tag :div, class: "id", data: {temp: @check.tax_year.id} do %>
   <% end %>
-  <%= f.submit id: "submit_button" %>
+
+
+  <%= form_for @check, url: tax_year_checks_path do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+    <%= f.label 'Date on Check'%>
+    <%= f.date_field :check_date%><br>
+    <%= f.label :amount %>
+    <%= f.number_field :amount, class: :text_field, step: :any %><br>
+    <%= f.label 'Miles Driven (Round-Trip)' %>
+    <%= f.number_field :mileage %><br>
+    <%= f.label 'Select an Employer' %>
+    <%= f.collection_select :employer_id, @check.tax_year.employers.uniq, :id, :name, include_blank: true %><br>
+    <% if !@check.employer %>
+      <%= f.label 'Or Write the Name of a New One' %>
+      <%= f.text_field :employer %><br>
+    <% end %>
+    <%= f.submit id: "submit_button" %>
+  <% end %>
 <% end %>
 
 
 <div id="checkResult">
-  <h2>Your New Check:</h2>
+  <h2 id="yourNew"></h2>
   <h4 id="checkName"></h4>
   <p id="checkDate"></p>
   <p id="checkAmount"></p>
@@ -38,16 +42,20 @@
     let id = $('.id').data('temp')
     $('form').submit(function(event) {
       event.preventDefault();
+      let newForm = document.querySelector('#new_check')
+      newForm.style.display = 'none'
       console.log(id)
       var values = $(this).serialize()
       var posting = $.post(`/tax_years/${id}/checks`, values)
       posting.done(function(data) {
         var check = data
-        $('#checkName').text(check['name'])
-        $('#checkDate').text(check['check_date'])
-        $('#checkAmount').text(check['amount'])
-        $('#checkMileage').text(check['mileage'])
-        $('#checkEmployer').text(check['employer']['name'])
+        $('#yourNew').text('Your New Check:')
+        $('#checkName').text(`Name: ${check['name']}`)
+        let date = new Date(check['check_date'])
+        $('#checkDate').text(`Date: ${date.toDateString()}`)
+        $('#checkAmount').text(`Amount: ${check['amount']}`)
+        $('#checkMileage').text(`Mileage: ${check['mileage']}`)
+        $('#checkEmployer').text(`Employer: ${check['employer']['name']}`)
       })
     })
   })
