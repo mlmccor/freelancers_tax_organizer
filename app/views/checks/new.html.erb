@@ -16,5 +16,37 @@
     <%= f.label 'Or Write the Name of a New One' %>
     <%= f.text_field :employer %><br>
   <% end %>
-  <%= f.submit %>
+  <%= f.submit id: "submit_button" %>
 <% end %>
+
+
+<div id="checkResult">
+  <h2>Your New Check:</h2>
+  <h4 id="checkName"></h4>
+  <p id="checkDate"></p>
+  <p id="checkAmount"></p>
+  <p id="checkMileage"></p>
+  <p id="checkEmployer"></p>
+</div>
+
+  
+</script>
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+
+    $('form').submit(function(event) {
+      event.preventDefault();
+      var values = $(this).serialize()
+      debugger
+      var posting = $.post('/checks', values)
+      posting.done(function(data) {
+        var check = data
+        $('#checkName').text(check['name'])
+        $('#checkDate').text(check['check_date'])
+        $('#checkAmount').text(check['amount'])
+        $('#checkMileage').text(check['mileage'])
+        $('#checkEmployer').text(check['employer']['name'])
+      })
+    })
+  })
+</script>

@@ -18,7 +18,7 @@ class ChecksController < ApplicationController
       @check.employer = Employer.find_or_create_by(name: params[:check][:employer], user: User.find(session[:user_id]))
     end
     if @check.save
-      redirect_to tax_year_path(@check.tax_year)
+      render json: @check, status: 201
     else
       render :new
     end

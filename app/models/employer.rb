@@ -1,7 +1,6 @@
 class Employer < ApplicationRecord
   belongs_to :user
   has_many :checks
-  has_many :tax_years, through: :checks
   scope :tax_form, -> { where(tax_form: true)}
   validates :name, presence: true
 
