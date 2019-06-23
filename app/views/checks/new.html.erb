@@ -36,7 +36,6 @@
 </div>
 
 
-</script>
 <script type="text/javascript" charset="utf-8">
   $(function () {
     let id = $('.id').data('temp')
@@ -44,7 +43,6 @@
       event.preventDefault();
       let newForm = document.querySelector('#new_check')
       newForm.style.display = 'none'
-      console.log(id)
       var values = $(this).serialize()
       var posting = $.post(`/tax_years/${id}/checks`, values)
       posting.done(function(data) {

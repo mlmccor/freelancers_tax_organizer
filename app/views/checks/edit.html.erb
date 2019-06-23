@@ -1,4 +1,9 @@
 <%= render partial: 'users/errors', locals: {object: @check}  %>
+<%= content_tag :div, class: "tyid", data: {temp: @check.tax_year.id} do %>
+<% end %>
+<%= content_tag :div, class: "id", data: {temp: @check.id} do %>
+<% end %>
+
 
 
 <%= form_for(@check, url: tax_year_check_path(@check)) do |f| %>
@@ -23,3 +28,38 @@
 <br><br>
 
 <%= button_to "Delete Check", tax_year_check_path(:id => @check.id), tax_year_id: @check.tax_year, :method => :delete %>
+
+<div id="checkResult">
+  <h2 id="yourNew"></h2>
+  <h4 id="checkName"></h4>
+  <p id="checkDate"></p>
+  <p id="checkAmount"></p>
+  <p id="checkMileage"></p>
+  <p id="checkEmployer"></p>
+</div>
+
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    let tyid = $('.tyid').data('temp')
+    let id = $('.id').data('temp')
+    $('form').submit(function(event) {
+      event.preventDefault();
+      debugger
+      let editForm = document.querySelector('.edit_check')
+      editForm.style.display = 'none'
+      var values = $(this).serialize()
+      var posting = $.patch(`/tax_years/${tyid}/checks/${id}`, values)
+      posting.done(function(data) {
+        var check = data
+        $('#yourNew').text('Your New Check:')
+        $('#checkName').text(`Name: ${check['name']}`)
+        let date = new Date(check['check_date'])
+        $('#checkDate').text(`Date: ${date.toDateString()}`)
+        $('#checkAmount').text(`Amount: ${check['amount']}`)
+        $('#checkMileage').text(`Mileage: ${check['mileage']}`)
+        $('#checkEmployer').text(`Employer: ${check['employer']['name']}`)
+      })
+    })
+  })
+</script>
