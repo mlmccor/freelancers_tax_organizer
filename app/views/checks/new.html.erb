@@ -21,6 +21,8 @@
       <%= f.label 'Or Write the Name of a New One' %>
       <%= f.text_field :employer %><br>
     <% end %>
+    <%= f.label :description %>
+    <%= f.text_area :description %><br>
     <%= f.submit id: "submit_button" %>
   <% end %>
 <% end %>
@@ -33,6 +35,7 @@
   <p id="checkAmount"></p>
   <p id="checkMileage"></p>
   <p id="checkEmployer"></p>
+  <p id="checkDescription"></p>
 </div>
 
 
@@ -54,6 +57,7 @@
         $('#checkAmount').text(`Amount: ${check['amount']}`)
         $('#checkMileage').text(`Mileage: ${check['mileage']}`)
         $('#checkEmployer').text(`Employer: ${check['employer']['name']}`)
+        $('#checkDescription').text(`Description: ${check['description']}`)
       })
     })
   })
