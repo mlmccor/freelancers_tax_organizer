@@ -3,4 +3,26 @@
 <p>Description:</p>
 <p><%=@check.description %></p><br>
 
-<%=link_to 'Edit Check', edit_tax_year_check_path(@check) %>
+<%=link_to 'Edit Check', edit_tax_year_check_path(@check)%><br>
+
+<button type="button" name="next_button" class= "next" data-id= "<%=@check.id%>" data-ty= "<%=@check.tax_year.id%>">Next Check</button>
+
+
+<script type="text/javascript">
+  $(function () {
+  $(".next").on("click", function(event) {
+    event.preventDefault()
+    var nextId = parseInt($(".next").attr("data-id")) + 1;
+    tyId = parseInt($(".next").attr("data-ty"))
+    debugger
+    $.get(`/tax_years/${nextId}/checks/${tyId}`, function(data) {
+      $(".productName").text(data["name"]);
+      $(".productPrice").text(data["price"]);
+      $(".productDescription").text(data["description"]);
+      $(".productInventory").text(data["inventory"]);
+      // re-set the id to current on the link
+      $(".js-next").attr("data-id", data["id"]);
+    });
+  });
+});
+</script>

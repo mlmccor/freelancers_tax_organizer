@@ -3,7 +3,8 @@ class ChecksController < ApplicationController
   end
 
   def show
-    @check = Check.find_by(id: params[:tax_year_id])
+    binding.pry
+    @check = Check.find_by(id: params[:tax_year_id].to_i)
   end
 
   def new
