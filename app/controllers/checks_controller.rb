@@ -29,7 +29,8 @@ class ChecksController < ApplicationController
   end
 
   def update
-    @check = Check.find_by(id: params[:id])
+    binding.pry
+    @check = Check.find_by(id: params[:tax_year_id])
     if @check.update(check_params)
       redirect_to tax_year_path(@check.tax_year)
     else
