@@ -3,6 +3,7 @@ class ChecksController < ApplicationController
   end
 
   def show
+    @check = Check.find_by(id: params[:tax_year_id])
   end
 
   def new
