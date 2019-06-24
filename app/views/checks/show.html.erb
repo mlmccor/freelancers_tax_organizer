@@ -1,4 +1,6 @@
-<%= @check.name %>
+<%= @check.name %> <br><br>
 
+<p>Description:</p>
+<p><%=@check.description %></p><br>
 
-<%=@check.description %>
+<%=link_to 'Edit Check', edit_tax_year_check_path(@check) %>

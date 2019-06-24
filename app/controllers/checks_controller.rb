@@ -30,10 +30,9 @@ class ChecksController < ApplicationController
   end
 
   def update
-    binding.pry
     @check = Check.find_by(id: params[:tax_year_id])
     if @check.update(check_params)
-      redirect_to tax_year_path(@check.tax_year)
+      redirect_to tax_year_check_path(@check)
     else
       render :edit
     end
