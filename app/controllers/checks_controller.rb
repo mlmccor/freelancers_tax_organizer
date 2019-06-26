@@ -3,13 +3,14 @@ class ChecksController < ApplicationController
   end
 
   def show
-    binding.pry
-    @check = Check.find_by(id: params[:tax_year_id].to_i)
+    @check = Check.find_by(id: params[:id].to_i)
   end
 
   def new
     @check = Check.new
     @check.tax_year = TaxYear.find_by(id: session[:current_tax_year_id])
+    binding.pry
+    render json: @check, status: 201
   end
 
   def create
@@ -27,11 +28,11 @@ class ChecksController < ApplicationController
   end
 
   def edit
-    @check = Check.find_by(id: params[:tax_year_id])
+    @check = Check.find_by(id: params[:id])
   end
 
   def update
-    @check = Check.find_by(id: params[:tax_year_id])
+    @check = Check.find_by(id: params[:id])
     if @check.update(check_params)
       redirect_to tax_year_check_path(@check)
     else

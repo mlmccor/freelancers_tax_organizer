@@ -1,6 +1,6 @@
-<%= @check.name %> <br><br>
+<h1 id="checkName"><%= @check.name %></h1> <br><br>
 
-<p>Description:</p>
+<h3 id="checkDescription">Description:</h3>
 <p><%=@check.description %></p><br>
 
 <%=link_to 'Edit Check', edit_tax_year_check_path(@check)%><br>
@@ -10,18 +10,17 @@
 
 <script type="text/javascript">
   $(function () {
-  $(".next").on("click", function(event) {
+  $("button.next").on("click", function(event) {
     event.preventDefault()
     var nextId = parseInt($(".next").attr("data-id")) + 1;
     tyId = parseInt($(".next").attr("data-ty"))
-    debugger
-    $.get(`/tax_years/${nextId}/checks/${tyId}`, function(data) {
-      $(".productName").text(data["name"]);
-      $(".productPrice").text(data["price"]);
-      $(".productDescription").text(data["description"]);
-      $(".productInventory").text(data["inventory"]);
+    var getting = $.get(`/tax_years/${nextId}/checks/${tyId}`)
+    getting.done(function(data) {
+      debugger
+      $(".checkName").text(data["name"]);
+      $(".checkDescription").text(data["description"]);
       // re-set the id to current on the link
-      $(".js-next").attr("data-id", data["id"]);
+      $("button.next").attr("data-id", data["id"]);
     });
   });
 });
