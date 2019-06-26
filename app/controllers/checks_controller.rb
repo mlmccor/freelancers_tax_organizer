@@ -4,13 +4,15 @@ class ChecksController < ApplicationController
 
   def show
     @check = Check.find_by(id: params[:id].to_i)
+    respond_to do |format|
+      format.html
+      format.json {render @check, status: 201}
+    end
   end
 
   def new
     @check = Check.new
     @check.tax_year = TaxYear.find_by(id: session[:current_tax_year_id])
-    binding.pry
-    render json: @check, status: 201
   end
 
   def create
