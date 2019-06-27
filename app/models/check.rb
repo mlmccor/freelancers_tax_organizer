@@ -7,6 +7,10 @@ class Check < ApplicationRecord
   validates :amount, presence: true
   validates :mileage, presence: true
 
+  def has_1099
+    self.employer.tax_form
+  end
+
   def self.by_year(year)
     where(tax_year: year)
   end

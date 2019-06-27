@@ -10,7 +10,7 @@
         <% employer.checks.by_year(current_tax_year).each do |check| %>
         <tr>
           <td><%= check.check_date.strftime("%m/%d/%Y") %></td>
-          <td><%= link_to check.name, tax_year_check_path(check)%></td>
+          <td><%= link_to check.name, tax_year_check_path(check.tax_year, check)%></td>
           <td>$<%=check.amount%></td>
           <td><%=check.mileage%></td>
         </tr>
