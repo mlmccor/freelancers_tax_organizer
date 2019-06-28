@@ -6,7 +6,7 @@ class ChecksController < ApplicationController
     @check = Check.find_by(id: params[:id].to_i)
     respond_to do |format|
       format.html
-      format.json {render @check, status: 201}
+      format.json {render json: @check, status: 201}
     end
   end
 

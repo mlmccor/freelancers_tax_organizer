@@ -1,21 +1,21 @@
 <% employer_collection.each do |employer| %>
   <div class= "text-left"><%= link_to employer.name, tax_year_employer_path(current_tax_year, employer) %></div>
-  <div class="">
-    <table>
+  <div>
+    <table >
       <thead>
         <th>Check Date</th><th>Name</th><th>Amount</th>
         <th>Mileage</th>
       </thead>
-      <tbody>
+      <tbody id="table-<%=employer.id%>">
         <% employer.checks.by_year(current_tax_year).each do |check| %>
         <tr>
           <td><%= check.check_date.strftime("%m/%d/%Y") %></td>
-          <td><%= link_to check.name, tax_year_check_path(check.tax_year, check)%></td>
+          <td><%= link_to check.name, tax_year_check_path(check.tax_year, check), class: 'check', id: check.id, data_set: check.tax_year.id%></td>
           <td>$<%=check.amount%></td>
           <td><%=check.mileage%></td>
         </tr>
         <% end %>
-        <tr>
+        <tr id= "total-<%=employer.id%>">
           <td></td>
           <td>Total</td>
           <td>$<%= employer.checks.by_year(current_tax_year).total_amount %></td>
