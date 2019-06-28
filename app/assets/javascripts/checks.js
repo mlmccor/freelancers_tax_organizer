@@ -5,7 +5,6 @@ class Check {
     this.amount = attributes['amount']
     this.mileage = attributes['mileage']
     this.description = attributes['description']
-    debugger
     this.employer = attributes['employer']['name']
   }
 

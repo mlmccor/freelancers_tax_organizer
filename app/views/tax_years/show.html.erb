@@ -1,5 +1,6 @@
 <h1><%=@tax_year.user.username %> - <%=@tax_year.year%> Freelance Income</h1>
-<%= link_to "Create a check", new_tax_year_check_path(tax_year_id: @tax_year.id), class: "newCheck" %>
+<%= link_to "Create a check", new_tax_year_check_path(tax_year_id: @tax_year.id), class: "newCheck" %><br>
+<%= link_to "Sort By Employer", tax_years_sorted_path(@tax_year.id)%>
 <%= content_tag :div, class: "id", data: {temp: @tax_year.id} do %>
 <% end %>
 
@@ -98,7 +99,6 @@ $(function() {
       .then(response => response.json())
       .then(json => {
         check = new Check(json)
-        $('#yourNew').text('Your New Check:')
         $('#checkName').text(`Name: ${check['name']}`)
         let date = new Date(check['check_date'])
         $('#checkDate').text(`Date: ${date.toDateString()}`)
@@ -106,14 +106,7 @@ $(function() {
         $('#checkMileage').text(`Mileage: ${check['mileage']}`)
         $('#checkEmployer').text(`Employer: ${check['employer']['name']}`)
         $('#checkDescription').text(`Description: ${check['description']}`)
-        if (data['employer']['tax_form'] === true) {
-          table = document.querySelector(`#table-${data['employer']['id']}`)
-          total = document.querySelector(`#total-${data['employer']['id']}`)
-          table.insertBefore(check.rowDisplay(date), total)
-        }
-
-      }
-      )
+      })
     })
   })
 </script>

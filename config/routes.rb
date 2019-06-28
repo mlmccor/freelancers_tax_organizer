@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post '/sessions/new', to: "sessions#create"
   get '/auth/facebook/callback' => 'sessions#create'
   root 'welcome#home'
+  get '/tax_years/:id/sorted' => 'tax_years#sorted', :as => 'tax_years_sorted'
 
 
 
