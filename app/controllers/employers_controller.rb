@@ -1,5 +1,7 @@
 class EmployersController < ApplicationController
-
+  def index
+    
+  end
   def show
     @employer = Employer.find_by(id: params[:id])
     if !current_user = @employer.user

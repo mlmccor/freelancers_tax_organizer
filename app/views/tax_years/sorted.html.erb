@@ -3,4 +3,5 @@
 
 <% @tax_year.employers.uniq.each do |employer| %>
   <button type="button" class="employer" id="<%=employer.id%>"><%=employer.name%></button><br>
+  <ul id="<%=employer.name%>"></ul>
 <% end %>

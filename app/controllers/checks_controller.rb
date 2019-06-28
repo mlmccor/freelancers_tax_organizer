@@ -1,5 +1,11 @@
 class ChecksController < ApplicationController
   def index
+    employer = Employer.find_by(id: params[:employer_id])
+    @checks = employer.checks
+    respond_to do |format|
+      format.html
+      format.json {render json: @checks, each_serializer: CheckSerializer, status: 201}
+    end
   end
 
   def show

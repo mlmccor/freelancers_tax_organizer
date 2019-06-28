@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :employers
+  resources :employers do
+    resources :checks
+  end
   resources :sessions
   resources :users
 
