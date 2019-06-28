@@ -73,7 +73,7 @@ $(function() {
         $('#yourNew').text('Your New Check:')
         $('#checkName').text(`Name: ${check['name']}`)
         let date = new Date(check['check_date'])
-        $('#checkDate').text(`Date: ${date.toDateString()}`)
+        $('#checkDate').text(`Date: ${date.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit' })}`)
         $('#checkAmount').text(`Amount: ${check['amount']}`)
         $('#checkMileage').text(`Mileage: ${check['mileage']}`)
         $('#checkEmployer').text(`Employer: ${check['employer']['name']}`)
@@ -94,10 +94,10 @@ $(function() {
     $('.check').click(function(event) {
       let id = $('.id').data('temp')
       event.preventDefault()
-      var posting = $.get(`/tax_years/${id}/checks/${event.target.id}`)
-      debugger
-      posting.done(function(data) {
-        check = new Check(data)
+      let answer= fetch(`/tax_years/${id}/checks/${event.target.id}.json`)
+      .then(response => response.json())
+      .then(json => {
+        check = new Check(json)
         $('#yourNew').text('Your New Check:')
         $('#checkName').text(`Name: ${check['name']}`)
         let date = new Date(check['check_date'])
@@ -112,7 +112,8 @@ $(function() {
           table.insertBefore(check.rowDisplay(date), total)
         }
 
-      })
+      }
+      )
     })
   })
 </script>

@@ -13,7 +13,7 @@ class Check {
     let row = document.createElement('TR')
     row.id = this.id
     let newDate = document.createElement('TD')
-    newDate.innerHTML = `${date.toDateString()}`
+    newDate.innerHTML = `${date.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit' })}`
     let name = document.createElement('TD')
     name.innerHTML = `<a href="#" id= check-${this.id}>${this.name}</a>`
     let amount = document.createElement('TD')
