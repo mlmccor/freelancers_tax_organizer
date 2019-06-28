@@ -62,13 +62,14 @@ $(function() {
 </script>
 <script type="text/javascript" charset="utf-8">
   $(function () {
-    let id = $('.id').data('temp')
+    // let id = ('.id').data('temp')
     $('form').submit(function(event) {
+      debugger
       event.preventDefault();
       let newForm = document.querySelector('#new_check')
       newForm.style.display = 'none'
       var values = $(this).serialize()
-      var posting = $.post(`/tax_years/${id}/checks`, values)
+      var posting = $.post(event.target.action, values)
       posting.done(function(data) {
         check = new Check(data)
         $('#yourNew').text('Your New Check:')
@@ -83,18 +84,24 @@ $(function() {
           table = document.querySelector(`#table-${data['employer']['id']}`)
           total = document.querySelector(`#total-${data['employer']['id']}`)
           table.insertBefore(check.rowDisplay(date), total)
+        } else {
+          table = document.querySelector(`#no-form-table`)
+          total = document.querySelector(`#no-form-total`)
+          table.insertBefore(check.noFormDisplay(date), total)
         }
 
       })
     })
   })
 </script>
+<a href=></a>
 
 <script type="text/javascript" charset="utf-8">
   $(function () {
     $('.check').click(function(event) {
       let id = $('.id').data('temp')
       event.preventDefault()
+      debugger
       let answer= fetch(`/tax_years/${id}/checks/${event.target.id}.json`)
       .then(response => response.json())
       .then(json => {
@@ -102,9 +109,9 @@ $(function() {
         $('#checkName').text(`Name: ${check['name']}`)
         let date = new Date(check['check_date'])
         $('#checkDate').text(`Date: ${date.toDateString()}`)
-        $('#checkAmount').text(`Amount: ${check['amount']}`)
+        $('#checkAmount').text(`Amount: $${check['amount']}`)
         $('#checkMileage').text(`Mileage: ${check['mileage']}`)
-        $('#checkEmployer').text(`Employer: ${check['employer']['name']}`)
+        $('#checkEmployer').text(`Employer: ${check['employer']}`)
         $('#checkDescription').text(`Description: ${check['description']}`)
       })
     })

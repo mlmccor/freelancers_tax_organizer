@@ -1,7 +1,9 @@
-<h1><%=@tax_year.year%> Checks Sorted By Employers</h1>
-
-
-<% @tax_year.employers.uniq.each do |employer| %>
-  <button type="button" class="employer" id="<%=employer.id%>"><%=employer.name%></button><br>
-  <ul id="<%=employer.name%>"></ul>
+<h1 data:"<%=@tax_year.id%>"><%=@tax_year.year%> Checks Sorted By Employers</h1>
+<%= content_tag :div, class: "id", data: {temp: @tax_year.id} do %>
 <% end %>
+
+
+
+<script type="text/javascript" charset="utf-8">
+  document.addEventListener('turbolinks:load', loadEmployers())
+</script>

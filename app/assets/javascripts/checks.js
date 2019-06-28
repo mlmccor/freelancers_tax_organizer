@@ -26,6 +26,27 @@ class Check {
     return row
   }
 
+  noFormDisplay(date) {
+    let row = document.createElement('TR')
+    row.id = this.id
+    let newDate = document.createElement('TD')
+    newDate.innerHTML = `${date.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit' })}`
+    let name = document.createElement('TD')
+    name.innerHTML = `<a href="#" id= check-${this.id}>${this.name}</a>`
+    let employer = document.createElement('TD')
+    employer.innerHTML = `<a href="#" id= employer->${this.employer}</a>`
+    let amount = document.createElement('TD')
+    amount.innerHTML = `$${this.amount}`
+    let mileage = document.createElement('TD')
+    mileage.innerHTML = `${this.mileage}`
+    row.appendChild(newDate)
+    row.appendChild(name)
+    row.appendChild(employer)
+    row.appendChild(amount)
+    row.appendChild(mileage)
+    return row
+  }
+
 
   detailDisplay() {
 
