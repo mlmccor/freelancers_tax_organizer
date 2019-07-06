@@ -1,7 +1,7 @@
 class EmployersController < ApplicationController
   def index
     @tax_year = TaxYear.find_by(id: params[:tax_year_id])
-    @employers = @tax_year.employers
+    @employers = @tax_year.employers.uniq
     respond_to do |format|
       format.html
       format.json {render json: @employers, each_serializer: EmployerSerializer, status: 201}

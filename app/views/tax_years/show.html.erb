@@ -64,13 +64,13 @@ $(function() {
   $(function () {
     // let id = ('.id').data('temp')
     $('form').submit(function(event) {
-      debugger
       event.preventDefault();
       let newForm = document.querySelector('#new_check')
       newForm.style.display = 'none'
       var values = $(this).serialize()
       var posting = $.post(event.target.action, values)
       posting.done(function(data) {
+        debugger
         check = new Check(data)
         $('#yourNew').text('Your New Check:')
         $('#checkName').text(`Name: ${check['name']}`)
