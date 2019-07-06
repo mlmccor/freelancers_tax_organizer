@@ -3,12 +3,15 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
 function loadEmployers() {
-  debugger
   var id = $('.id').data('temp')
   let answer= fetch(`/tax_years/${id}/employers.json`)
   .then(response => response.json())
   .then(json => {
-    
+    json.forEach( function(employer){
+      employer = new Employer(employer)
+      employer.displayEmployer()
+    })
+
   })
 }
 
