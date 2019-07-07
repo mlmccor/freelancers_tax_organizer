@@ -48,6 +48,7 @@
       <p id="checkMileage"></p>
       <p id="checkEmployer"></p>
       <p id="checkDescription"></p>
+      <p id="checkEditLink"></p>
     </div>
   </div>
 </div>
@@ -70,7 +71,6 @@ $(function() {
       var values = $(this).serialize()
       var posting = $.post(event.target.action, values)
       posting.done(function(data) {
-        debugger
         check = new Check(data)
         $('#yourNew').text('Your New Check:')
         $('#checkName').text(`Name: ${check['name']}`)
@@ -101,7 +101,6 @@ $(function() {
     $('.check').click(function(event) {
       let id = $('.id').data('temp')
       event.preventDefault()
-      debugger
       let answer= fetch(`/tax_years/${id}/checks/${event.target.id}.json`)
       .then(response => response.json())
       .then(json => {
@@ -113,6 +112,8 @@ $(function() {
         $('#checkMileage').text(`Mileage: ${check['mileage']}`)
         $('#checkEmployer').text(`Employer: ${check['employer']}`)
         $('#checkDescription').text(`Description: ${check['description']}`)
+        let edit = document.querySelector('#checkEditLink')
+        edit.innerHTML = `<a href="/checks/${check.id}/edit">Edit Check</a>`
       })
     })
   })

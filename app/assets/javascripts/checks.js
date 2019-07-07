@@ -1,5 +1,6 @@
 class Check {
   constructor(attributes) {
+    this.id = attributes['id']
     this.name = attributes['name']
     this.check_date = attributes['check_date']
     this.amount = attributes['amount']

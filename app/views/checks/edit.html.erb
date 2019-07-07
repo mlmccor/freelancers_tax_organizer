@@ -29,4 +29,4 @@
 <% end %>
 <br><br>
 
-<%= button_to "Delete Check", tax_year_check_path(:id => @check.id), tax_year_id: @check.tax_year, :method => :delete %>
+<%= button_to "Delete Check", tax_year_check_path(@check.tax_year, @check), tax_year_id: @check.tax_year, :method => :delete %>

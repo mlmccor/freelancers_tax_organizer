@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   end
   resources :sessions
   resources :users
+  resources :checks
 
 
   resources :tax_years do
