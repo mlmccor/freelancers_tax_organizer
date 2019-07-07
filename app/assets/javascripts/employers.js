@@ -11,11 +11,33 @@ class Employer {
 
   displayEmployer() {
     let employers = document.querySelector('.employers')
-    let newEm = document.createElement('h4')
+    const newEm = document.createElement('div')
+    newEm.classname = 'text-left'
     let newBreak = document.createElement('br')
+    newEm.id = this.id
     newEm.innerHTML = this.name
     newEm.appendChild(newBreak)
     employers.appendChild(newEm)
+    newEm.addEventListener('click', function(event) {
+      event.preventDefault()
+      var newTable = document.createElement('table')
+      newTable.id = `table-${event.target.id}`
+      event.target.appendChild(newTable)
+      debugger
+      let answer = fetch(`/employers/${event.target.id}/checks.json`)
+      .then(response => response.json())
+      .then(json => {
+        json.forEach( check => {
+          var newTable = document.querySelector('#table-1')
+          let newCheck = new Check(check)
+          let date = new Date(check['check_date'])
+          newTable.appendChild(newCheck.rowDisplay(date))
+        })
 
+      })
+
+
+    })
   }
+
 }
