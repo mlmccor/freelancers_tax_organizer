@@ -29,7 +29,10 @@ class ChecksController < ApplicationController
       @check.employer = Employer.find_or_create_by(name: params[:check][:employer], user: User.find(session[:user_id]))
     end
     if @check.save
-      render json: @check, status: 201
+      respond_to do |format|
+        format.html
+        format.json {render json: @check, status: 201}
+      end
     else
       render :new
     end

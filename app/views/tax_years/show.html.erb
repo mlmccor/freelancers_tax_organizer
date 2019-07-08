@@ -63,16 +63,16 @@ $(function() {
 </script>
 <script type="text/javascript" charset="utf-8">
   $(function () {
-    // let id = ('.id').data('temp')
     $('form').submit(function(event) {
       event.preventDefault();
       let newForm = document.querySelector('#new_check')
       newForm.style.display = 'none'
       var values = $(this).serialize()
-      var posting = $.post(event.target.action, values)
+      var posting = $.post(`${event.target.action}.json`, values)
       posting.done(function(data) {
+        debugger
         check = new Check(data)
-        $('#yourNew').text('Your New Check:')
+        $('#yourNew').text('Your Check:')
         $('#checkName').text(`Name: ${check['name']}`)
         let date = new Date(check['check_date'])
         $('#checkDate').text(`Date: ${date.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit' })}`)
