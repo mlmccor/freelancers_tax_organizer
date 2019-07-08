@@ -58,10 +58,9 @@ function createAndDisplayCheck(event)  {
   event.preventDefault();
   let newForm = document.querySelector('#new_check')
   newForm.style.display = 'none'
-  var values = $(this).serialize()
+  var values = $(event.target).serialize()
   var posting = $.post(`${event.target.action}.json`, values)
   posting.done(function(data) {
-    debugger
     check = new Check(data)
     $('#yourNew').text('Your Check:')
     $('#checkName').text(`Name: ${check['name']}`)
