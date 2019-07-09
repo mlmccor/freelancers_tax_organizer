@@ -49,9 +49,7 @@ class Check {
   }
 
 
-  detailDisplay() {
 
-  }
 }
 
 function createAndDisplayCheck(event)  {
@@ -79,6 +77,5 @@ function createAndDisplayCheck(event)  {
       total = document.querySelector(`#no-form-total`)
       table.insertBefore(check.noFormDisplay(date), total)
     }
-
   })
 }

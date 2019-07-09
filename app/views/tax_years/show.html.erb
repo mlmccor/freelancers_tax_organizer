@@ -6,10 +6,8 @@
 
 <div class="row">
   <div class="col-md">
-
-
     <h2 class= "text-left">Income from Form 1099's</h2>
-    <div class="">
+    <div>
       <%= render partial: 'table', locals: {employer_collection: @tax_year.employers.tax_form.uniq, current_tax_year: @tax_year} %>
     </div>
     <br><br>
@@ -56,6 +54,7 @@
 $(function() {
   $(".newCheck").click(function(event) {
     event.preventDefault()
+    document.querySelector('#checkResult').style.display= "none"
     document.querySelector('.newForm').style.display= "inline"
     let id = $('.id').data('temp')
   })
@@ -73,6 +72,8 @@ $(function() {
 <script type="text/javascript" charset="utf-8">
   $(function () {
     $('.check').click(function(event) {
+      document.querySelector('.newForm').style.display= "none"
+      document.querySelector('#checkResult').style.display= "inline"
       let id = $('.id').data('temp')
       event.preventDefault()
       let answer= fetch(`/tax_years/${id}/checks/${event.target.id}.json`)
