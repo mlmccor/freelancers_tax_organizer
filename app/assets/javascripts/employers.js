@@ -10,15 +10,16 @@ class Employer {
   }
 
   displayEmployer() {
-    let employers = document.querySelector('.employers')
+    let employers = document.querySelector('#employers')
     let newEm = document.createElement('div')
-    let newBreak = document.createElement('br')
+    let b = document.createElement('br')
     newEm.id = this.id
     newEm.innerHTML = this.name
-    newEm.appendChild(newBreak)
+    newEm.appendChild(b)
     employers.appendChild(newEm)
     newEm.addEventListener('click', function(event) {
-      if (!document.querySelector(`#table-${event.target.id}`)) {
+      debugger
+      if (!document.querySelector(`#table-${event.target.id}`) || !document.querySelector(`#${event.target.id}`) ) {
         listChecks(event)
       }
     })
@@ -27,9 +28,21 @@ class Employer {
 
 function listChecks(event) {
   event.preventDefault()
+  let firstBreak = document.createElement('br')
+  event.target.appendChild(firstBreak)
   var newTable = document.createElement('table')
   newTable.id = `table-${event.target.id}`
   event.target.appendChild(newTable)
+  let thead = newTable.createTHead()
+  let headers = thead.insertRow(0)
+  let dateHeader = headers.insertCell(0)
+  dateHeader.innerText = 'Date'
+  let nameHeader = headers.insertCell(1)
+  nameHeader.innerText = 'Name'
+  let amountHeader = headers.insertCell(2)
+  amountHeader.innerText = 'Amount'
+  let mileageHeader = headers.insertCell(3)
+  mileageHeader.innerText = 'Mileage'
   let answer = fetch(`/employers/${event.target.id}/checks.json`)
   .then(response => response.json())
   .then(json => {
@@ -39,5 +52,8 @@ function listChecks(event) {
       let date = new Date(check['check_date'])
       newTable.appendChild(newCheck.rowDisplay(date))
     })
+
   })
+  let lastBreak= document.createElement('br')
+  event.target.appendChild(lastBreak)
 }

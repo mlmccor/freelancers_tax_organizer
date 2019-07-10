@@ -7,14 +7,15 @@ function loadEmployers() {
   let answer= fetch(`/tax_years/${id}/employers.json`)
   .then(response => response.json())
   .then(json => {
-    json.forEach( function(employer){
-      employer = new Employer(employer)
+    json.forEach( function(emp){
+      let employer = new Employer(emp)
       employer.displayEmployer()
     })
 
   })
 }
 
+// document.addEventListener('turbolinks:load', loadEmployers())
 
 
 

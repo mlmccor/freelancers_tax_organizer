@@ -54,8 +54,8 @@ class Check {
 
 function createAndDisplayCheck(event)  {
   event.preventDefault();
-  let newForm = document.querySelector('#new_check')
-  newForm.style.display = 'none'
+  document.querySelector('.newForm').style.display= "none"
+  document.querySelector('#checkResult').style.display= "inline"
   var values = $(event.target).serialize()
   var posting = $.post(`${event.target.action}.json`, values)
   posting.done(function(data) {
@@ -66,7 +66,8 @@ function createAndDisplayCheck(event)  {
     $('#checkDate').text(`Date: ${date.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit' })}`)
     $('#checkAmount').text(`Amount: ${check['amount']}`)
     $('#checkMileage').text(`Mileage: ${check['mileage']}`)
-    $('#checkEmployer').text(`Employer: ${check['employer']['name']}`)
+    debugger
+    $('#checkEmployer').text(`Employer: ${check['employer']}`)
     $('#checkDescription').text(`Description: ${check['description']}`)
     if (data['employer']['tax_form'] === true) {
       table = document.querySelector(`#table-${data['employer']['id']}`)

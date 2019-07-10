@@ -3,9 +3,9 @@
 <% end %><br><br>
 <div class="row">
   <div class="col-md">
+    <button type="button" name="button" onclick="loadEmployers()">Show Employers</button>
 
-
-  <div class="employers">
+  <div id="employers" class='text-left'>
 
   </div>
 </div>
@@ -13,5 +13,4 @@
 
 
 <script type="text/javascript" charset="utf-8">
-  document.addEventListener('turbolinks:load', loadEmployers())
 </script>
