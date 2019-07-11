@@ -6,7 +6,6 @@ class Check {
     this.amount = attributes['amount']
     this.mileage = attributes['mileage']
     this.description = attributes['description']
-    this.employer = attributes['employer']['name']
   }
 
   rowDisplay(date) {
@@ -25,6 +24,13 @@ class Check {
     row.appendChild(amount)
     row.appendChild(mileage)
     return row
+  }
+
+  checkRow() {
+    let row = document.createElement('TR')
+    row.id = this.id
+    let newDate = document.createElement('TD')
+    debugger
   }
 
   noFormDisplay(date) {

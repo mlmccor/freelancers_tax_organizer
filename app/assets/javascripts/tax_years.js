@@ -35,7 +35,7 @@ function displayNoFormChecks() {
   .then(response => response.json())
   .then(json => {
     json.forEach( function(check){
-      let check = new Check(check)
+       newCheck = new Check(check)
       debugger
       // TODO: add function to create table and add checks
 
