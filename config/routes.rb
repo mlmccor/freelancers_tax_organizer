@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :tax_years do
     resources :checks
     resources :employers
+    get 'employer/forms' => 'employers#form'
+
   end
   post '/sessions/new', to: "sessions#create"
   get '/auth/facebook/callback' => 'sessions#create'

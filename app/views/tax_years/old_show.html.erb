@@ -1,0 +1,95 @@
+<h1><%=@tax_year.user.username %> - <%=@tax_year.year%> Freelance Income</h1>
+<%= link_to "Create a check", new_tax_year_check_path(tax_year_id: @tax_year.id), class: "newCheck" %><br>
+<%= link_to "Sort By Employer", tax_years_sorted_path(@tax_year.id)%>
+<%= content_tag :div, class: "id", data: {temp: @tax_year.id} do %>
+<% end %>
+
+<div class="row">
+  <div class="col-md">
+    <h2 class= "text-left">Income from Form 1099's</h2>
+    <div>
+      <%= render partial: 'table', locals: {employer_collection: @tax_year.employers.tax_form.uniq, current_tax_year: @tax_year} %>
+    </div>
+    <br><br>
+
+    <h2 class= "text-left">Income without 1099's</h2>
+    <%= render partial: 'table_with_employers', locals: {no_form_checks: @tax_year.employers.no_form.employer_checks(@tax_year).flatten.uniq, current_tax_year: @tax_year} %><br>
+  </div>
+  <div class="col-md">
+
+    <div class="newForm">
+
+        <%= form_for Check.new, url: tax_year_checks_path(@tax_year) do |f| %>
+          <%= f.label :name %>
+          <%= f.text_field :name %><br>
+          <%= f.label 'Date on Check'%>
+          <%= f.date_field :check_date%><br>
+          <%= f.label :amount %>
+          <%= f.number_field :amount, class: :text_field, step: :any %><br>
+          <%= f.label 'Miles Driven (Round-Trip)' %>
+          <%= f.number_field :mileage %><br>
+          <%= f.label 'Select an Employer' %>
+          <%= f.collection_select :employer_id, @tax_year.employers.uniq, :id, :name, include_blank: true %><br>
+          <%= f.label 'Or Write the Name of a New One' %>
+          <%= f.text_field :employer %><br>
+          <%= f.label :description %>
+          <%= f.text_area :description %><br>
+          <%= f.submit id: "submit_button" %>
+        <% end %>
+    </div>
+
+    <div id="checkResult">
+      <h2 id="yourNew"></h2>
+      <h4 id="checkName"></h4>
+      <p id="checkDate"></p>
+      <p id="checkAmount"></p>
+      <p id="checkMileage"></p>
+      <p id="checkEmployer"></p>
+      <p id="checkDescription"></p>
+      <p id="checkEditLink"></p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  $(".newCheck").click(function(event) {
+    event.preventDefault()
+    document.querySelector('#checkResult').style.display= "none"
+    document.querySelector('.newForm').style.display= "inline"
+    let id = $('.id').data('temp')
+  })
+})
+</script>
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form').submit(function(event) {
+      createAndDisplayCheck(event)
+    })
+  })
+</script>
+<a href=></a>
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('.check').click(function(event) {
+      document.querySelector('.newForm').style.display= "none"
+      document.querySelector('#checkResult').style.display= "inline"
+      let id = $('.id').data('temp')
+      event.preventDefault()
+      let answer= fetch(`/tax_years/${id}/checks/${event.target.id}.json`)
+      .then(response => response.json())
+      .then(json => {
+        check = new Check(json)
+        $('#checkName').text(`Name: ${check['name']}`)
+        let date = new Date(check['check_date'])
+        $('#checkDate').text(`Date: ${date.toDateString()}`)
+        $('#checkAmount').text(`Amount: $${check['amount']}`)
+        $('#checkMileage').text(`Mileage: ${check['mileage']}`)
+        $('#checkEmployer').text(`Employer: ${check['employer']}`)
+        $('#checkDescription').text(`Description: ${check['description']}`)
+        let edit = document.querySelector('#checkEditLink')
+        edit.innerHTML = `<a href="/checks/${check.id}/edit">Edit Check</a>`
+      })
+    })
+  })
+</script>

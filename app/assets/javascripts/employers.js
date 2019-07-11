@@ -7,6 +7,7 @@ class Employer {
   constructor(attributes) {
     this.id = attributes['id']
     this.name = attributes['name']
+    this.checks = attributes['checks']
   }
 
   displayEmployer() {
@@ -15,10 +16,12 @@ class Employer {
     let b = document.createElement('br')
     newEm.id = this.id
     newEm.innerHTML = this.name
+    this.checks
+    // TODO: impliment listChecks into this method
+    debugger
     newEm.appendChild(b)
     employers.appendChild(newEm)
     newEm.addEventListener('click', function(event) {
-      debugger
       if (!document.querySelector(`#table-${event.target.id}`) || !document.querySelector(`#${event.target.id}`) ) {
         listChecks(event)
       }

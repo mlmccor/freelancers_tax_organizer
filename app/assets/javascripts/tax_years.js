@@ -15,6 +15,21 @@ function loadEmployers() {
   })
 }
 
+function displayFormEmployers() {
+  var id = $('.id').data('temp')
+  let answer= fetch(`/tax_years/${id}/forms.json`)
+  .then(response => response.json())
+  .then(json => {
+    debugger
+    json.forEach( function(emp){
+      let employer = new Employer(emp)
+      // TODO: change next line to new function
+      employer.displayEmployer()
+    })
+
+  })
+}
+
 // document.addEventListener('turbolinks:load', loadEmployers())
 
 

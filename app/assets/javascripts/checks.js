@@ -56,6 +56,7 @@ function createAndDisplayCheck(event)  {
   event.preventDefault();
   document.querySelector('.newForm').style.display= "none"
   document.querySelector('#checkResult').style.display= "inline"
+  debugger
   var values = $(event.target).serialize()
   var posting = $.post(`${event.target.action}.json`, values)
   posting.done(function(data) {

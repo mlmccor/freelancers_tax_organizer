@@ -7,6 +7,15 @@ class EmployersController < ApplicationController
       format.json {render json: @employers, each_serializer: EmployerSerializer, status: 201}
     end
   end
+
+  def form
+    @tax_year = TaxYear.find_by(id: params[:tax_year_id])
+    @employers = @tax_year.employers.tax_form.uniq
+    respond_to do |format|
+      format.html
+      format.json {render json: @employers, each_serializer: EmployerSerializer, status: 201}
+    end
+  end
   def show
     @employer = Employer.find_by(id: params[:id])
     if !current_user = @employer.user
