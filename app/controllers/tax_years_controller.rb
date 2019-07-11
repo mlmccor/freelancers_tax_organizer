@@ -2,6 +2,7 @@ class TaxYearsController < ApplicationController
 
   def show
     @tax_year = TaxYear.find_by(id: params[:id])
+    binding.pry
     if current_user == @tax_year.user
       session[:current_tax_year_id] = @tax_year.id
     else

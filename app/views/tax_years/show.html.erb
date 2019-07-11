@@ -7,10 +7,54 @@
   <div class="col-md">
     <button type="button" name="button" onclick="displayFormEmployers()">Show Employers</button><br>
     <h2 class= "text-left">Income from Form 1099's</h2>
-    <div class="form_employees">
+    <div id= "employers" class="text-left">
 
     </div>
-
+    <button type="button" name="button" onclick="displayNoFormChecks()">Show Employers</button><br>
   </div>
 
 </div>
+
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  $(".newCheck").click(function(event) {
+    event.preventDefault()
+    document.querySelector('#checkResult').style.display= "none"
+    document.querySelector('.newForm').style.display= "inline"
+    let id = $('.id').data('temp')
+  })
+})
+</script>
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form').submit(function(event) {
+      createAndDisplayCheck(event)
+    })
+  })
+</script>
+<a href=></a>
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('.check').click(function(event) {
+      document.querySelector('.newForm').style.display= "none"
+      document.querySelector('#checkResult').style.display= "inline"
+      let id = $('.id').data('temp')
+      event.preventDefault()
+      let answer= fetch(`/tax_years/${id}/checks/${event.target.id}.json`)
+      .then(response => response.json())
+      .then(json => {
+        check = new Check(json)
+        $('#checkName').text(`Name: ${check['name']}`)
+        let date = new Date(check['check_date'])
+        $('#checkDate').text(`Date: ${date.toDateString()}`)
+        $('#checkAmount').text(`Amount: $${check['amount']}`)
+        $('#checkMileage').text(`Mileage: ${check['mileage']}`)
+        $('#checkEmployer').text(`Employer: ${check['employer']}`)
+        $('#checkDescription').text(`Description: ${check['description']}`)
+        let edit = document.querySelector('#checkEditLink')
+        edit.innerHTML = `<a href="/checks/${check.id}/edit">Edit Check</a>`
+      })
+    })
+  })
+</script>

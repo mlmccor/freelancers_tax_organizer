@@ -13,7 +13,7 @@
     <br><br>
 
     <h2 class= "text-left">Income without 1099's</h2>
-    <%= render partial: 'table_with_employers', locals: {no_form_checks: @tax_year.employers.no_form.employer_checks(@tax_year).flatten.uniq, current_tax_year: @tax_year} %><br>
+    <%= render partial: 'table_with_employers', locals: {no_form_checks: @tax_year.checks.no_checks, current_tax_year: @tax_year} %><br>
   </div>
   <div class="col-md">
 

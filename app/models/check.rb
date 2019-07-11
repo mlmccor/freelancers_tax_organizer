@@ -32,6 +32,8 @@ class Check < ApplicationRecord
     sum(&:mileage)
   end
 
-
+  def self.no_checks
+    self.select{|check| check.employer.tax_form === false }
+  end
 
 end

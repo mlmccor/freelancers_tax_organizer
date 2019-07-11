@@ -18,8 +18,8 @@
         <tr id= "total-<%=employer.id%>">
           <td></td>
           <td>Total</td>
-          <td>$<%= employer.checks.by_year(current_tax_year).total_amount %></td>
-          <td><%= employer.checks.by_year(current_tax_year).total_mileage %></td>
+          <td>$<%= employer.checks.total_amount %></td>
+          <td><%= employer.checks.total_mileage %></td>
         </tr>
       </tbody>
     </table>
