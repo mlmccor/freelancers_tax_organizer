@@ -8,6 +8,16 @@ class ChecksController < ApplicationController
     end
   end
 
+  def no_form
+    binding.pry
+    tax_year = TaxYear.find_by(id: params[:tax_year_id])
+    @checks = tax_year.checks.no_checks
+    respond_to do |format|
+      format.html
+      format.json {render json: @checks, each_serializer: CheckSerializer, status: 201}
+    end
+  end
+
   def show
     @check = Check.find_by(id: params[:id].to_i)
     respond_to do |format|

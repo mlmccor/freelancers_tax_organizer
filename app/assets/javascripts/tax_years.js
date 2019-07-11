@@ -30,8 +30,18 @@ function displayFormEmployers() {
 }
 
 function displayNoFormChecks() {
-  // TODO: add No Form Checks to DOM
-  debugger
+  var id = $('.id').data('temp')
+  let answer= fetch(`/tax_years/${id}/check/no_form.json`)
+  .then(response => response.json())
+  .then(json => {
+    json.forEach( function(check){
+      let check = new Check(check)
+      debugger
+      // TODO: add function to create table and add checks
+
+    })
+
+  })
 }
 
 // document.addEventListener('turbolinks:load', loadEmployers())

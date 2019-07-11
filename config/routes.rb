@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :checks
     resources :employers
     get 'employer/forms' => 'employers#form'
+    get 'check/no_form' => 'checks#no_form'
 
   end
   post '/sessions/new', to: "sessions#create"
