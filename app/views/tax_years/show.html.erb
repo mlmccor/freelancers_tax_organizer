@@ -5,15 +5,54 @@
 
 <div class="row">
   <div class="col-md">
-    <button type="button" name="button" onclick="displayFormEmployers()">Checks with 1099's</button><br>
+
     <h2 class= "text-left">Income from Form 1099's</h2>
     <div id= "employers" class="text-left">
 
     </div>
-    <button type="button" name="button" onclick="displayNoFormChecks()">Checks Without 1099's</button><br>
+    <h2 class= 'text-left'>Income without Form 1099's</h2>
+    <div id="no_form_container" class="text-left">
+
+    </div>
   </div>
 
+  <div class="col-md">
+    <div class="newForm">
+        <%= form_for Check.new, url: tax_year_checks_path(@tax_year) do |f| %>
+          <%= f.label :name %>
+          <%= f.text_field :name %><br>
+          <%= f.label 'Date on Check'%>
+          <%= f.date_field :check_date%><br>
+          <%= f.label :amount %>
+          <%= f.number_field :amount, class: :text_field, step: :any %><br>
+          <%= f.label 'Miles Driven (Round-Trip)' %>
+          <%= f.number_field :mileage %><br>
+          <%= f.label 'Select an Employer' %>
+          <%= f.collection_select :employer_id, @tax_year.employers.uniq, :id, :name, include_blank: true %><br>
+          <%= f.label 'Or Write the Name of a New One' %>
+          <%= f.text_field :employer %><br>
+          <%= f.label :description %>
+          <%= f.text_area :description %><br>
+          <%= f.submit id: "submit_button" %>
+        <% end %>
+    </div>
+    <div id="checkResult">
+      <h2 id="yourNew"></h2>
+      <h4 id="checkName"></h4>
+      <p id="checkDate"></p>
+      <p id="checkAmount"></p>
+      <p id="checkMileage"></p>
+      <p id="checkEmployer"></p>
+      <p id="checkDescription"></p>
+      <p id="checkEditLink"></p>
+    </div>
+  </div>
 </div>
+
+<script type="text/javascript">
+  document.addEventListener('turbolinks:load', displayFormEmployers())
+  document.addEventListener('turbolinks:load', displayNoFormChecks())
+</script>
 
 <script type="text/javascript" charset="utf-8">
 $(function() {
@@ -37,6 +76,7 @@ $(function() {
 <script type="text/javascript" charset="utf-8">
   $(function () {
     $('.check').click(function(event) {
+      debugger
       document.querySelector('.newForm').style.display= "none"
       document.querySelector('#checkResult').style.display= "inline"
       let id = $('.id').data('temp')

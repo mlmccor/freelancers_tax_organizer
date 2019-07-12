@@ -34,13 +34,14 @@ class Employer {
     amountHeader.innerText = 'Amount'
     let mileageHeader = headers.insertCell(3)
     mileageHeader.innerText = 'Mileage'
-    this.checks.forEach(function(check) {
-      // var newTable = document.querySelector(`#table-${check.employer.id}`)
-      let newCheck = new Check (check)
-      debugger
+    for (let i = 0;i<this.checks.length;i++) {
+      var newTable = document.querySelector(`#table-${this.id}`)
+      let newCheck = new Check (this.checks[i])
       let date = new Date(newCheck.check_date)
-      newCheck.rowDisplay(date)
-    })
+      newTable.appendChild(newCheck.rowDisplay(date))
+    }
+    newEm.appendChild(b)
+
     // TODO: impliment listChecks into this method
     // newEm.appendChild(b)
     // employers.appendChild(newEm)

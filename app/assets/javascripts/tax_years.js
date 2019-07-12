@@ -31,12 +31,30 @@ function displayFormEmployers() {
 
 function displayNoFormChecks() {
   var id = $('.id').data('temp')
+  let noFormContainer = document.querySelector('#no_form_container')
+  var newTable = document.createElement('table')
+  newTable.id = `table-no-form`
+  noFormContainer.appendChild(newTable)
+  let thead = newTable.createTHead()
+  let headers = thead.insertRow(0)
+  let dateHeader = headers.insertCell(0)
+  dateHeader.innerText = 'Date'
+  let nameHeader = headers.insertCell(1)
+  nameHeader.innerText = 'Name'
+  let employerHeader = headers.insertCell(2)
+  employerHeader.innerText = 'Employer'
+  let amountHeader = headers.insertCell(3)
+  amountHeader.innerText = 'Amount'
+  let mileageHeader = headers.insertCell(4)
+  mileageHeader.innerText = 'Mileage'
   let answer= fetch(`/tax_years/${id}/check/no_form.json`)
   .then(response => response.json())
   .then(json => {
     json.forEach( function(check){
-       newCheck = new Check(check)
-      debugger
+      let table = document.querySelector('#table-no-form')
+      let newCheck = new Check(check)
+      let date = new Date(newCheck.check_date)
+      table.appendChild(newCheck.noFormDisplay(date))
       // TODO: add function to create table and add checks
 
     })
