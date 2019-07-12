@@ -65,7 +65,6 @@ function createAndDisplayCheck(event)  {
   event.preventDefault();
   document.querySelector('.newForm').style.display= "none"
   document.querySelector('#checkResult').style.display= "inline"
-  debugger
   var values = $(event.target).serialize()
   var posting = $.post(`${event.target.action}.json`, values)
   posting.done(function(data) {
@@ -82,11 +81,11 @@ function createAndDisplayCheck(event)  {
     if (data['employer']['tax_form'] === true) {
       table = document.querySelector(`#table-${data['employer']['id']}`)
       total = document.querySelector(`#total-${data['employer']['id']}`)
-      table.insertBefore(check.rowDisplay(date), total)
+      table.appendChild(check.rowDisplay(date))
     } else {
-      table = document.querySelector(`#no-form-table`)
+      table = document.querySelector(`#table-no-form`)
       total = document.querySelector(`#no-form-total`)
-      table.insertBefore(check.noFormDisplay(date), total)
+      table.appendChild(check.noFormDisplay(date))
     }
   })
 }
@@ -115,7 +114,6 @@ function displayCheck(event) {
 function addCheckListeners() {
   $(function () {
     $('.check').click(function(event) {
-      debugger
       document.querySelector('.newForm').style.display= "none"
       document.querySelector('#checkResult').style.display= "inline"
       let id = $('.id').data('temp')
@@ -139,7 +137,6 @@ function addCheckListeners() {
 }
 
 function loadCheckResults() {
-  debugger
   document.querySelector('.newForm').style.display= "none"
   document.querySelector('#checkResult').style.display= "inline"
   let id = $('.id').data('temp')
