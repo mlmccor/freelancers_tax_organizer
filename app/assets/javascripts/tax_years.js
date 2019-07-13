@@ -91,6 +91,10 @@ function noFormTotalRow(json) {
   table.appendChild(row)
 }
 
+function refreshTotals() {
+  // TODO: add functionality to refresh tables total rows
+}
+
 
 // document.addEventListener('turbolinks:load', loadEmployers())
 
