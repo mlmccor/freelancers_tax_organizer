@@ -81,11 +81,11 @@ function createAndDisplayCheck(event)  {
     if (data['employer']['tax_form'] === true) {
       table = document.querySelector(`#table-${data['employer']['id']}`)
       total = document.querySelector(`#total-${data['employer']['id']}`)
-      table.appendChild(check.rowDisplay(date))
+      table.insertBefore(check.rowDisplay(date), total)
     } else {
       table = document.querySelector(`#table-no-form`)
       total = document.querySelector(`#no-form-total`)
-      table.appendChild(check.noFormDisplay(date))
+      table.insertBefore(check.noFormDisplay(date), total)
     }
   })
 }

@@ -22,7 +22,7 @@ class Employer {
     let firstBreak = document.createElement('br')
     newEm.appendChild(firstBreak)
     var newTable = document.createElement('table')
-    newTable.id = `table-${newEm.id}`
+    newTable.id = `table-${this.id}`
     newEm.appendChild(newTable)
     let thead = newTable.createTHead()
     let headers = thead.insertRow(0)
@@ -40,6 +40,7 @@ class Employer {
       let date = new Date(newCheck.check_date)
       newTable.appendChild(newCheck.rowDisplay(date))
     }
+    newTable.appendChild(this.totalsRow())
     newEm.appendChild(b)
 
     // TODO: impliment listChecks into this method
@@ -50,6 +51,23 @@ class Employer {
     //     listChecks(event)
     //   }
     // })
+  }
+
+  totalsRow() {
+    let row = document.createElement('TR')
+    row.id = `total-${this.id}`
+    let blank = document.createElement('TD')
+    let text = document.createElement('TD')
+    text.innerText = 'Total'
+    let amountTotal = document.createElement('TD')
+    amountTotal.innerHTML = `$${this.checks.reduce(totalAmount, 0)}`
+    let mileageTotal = document.createElement('TD')
+    mileageTotal.innerHTML = this.checks.reduce(totalMileage, 0)
+    row.appendChild(blank)
+    row.appendChild(text)
+    row.appendChild(amountTotal)
+    row.appendChild(mileageTotal)
+    return row
   }
 }
 
