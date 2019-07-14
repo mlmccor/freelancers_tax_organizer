@@ -50,14 +50,11 @@ function displayNoFormChecks() {
   let answer= fetch(`/tax_years/${id}/check/no_form.json`)
   .then(response => response.json())
   .then(json => {
-    debugger
     json.forEach( function(check){
       let table = document.querySelector('#table-no-form')
       let newCheck = new Check(check)
       let date = new Date(newCheck.check_date)
       table.appendChild(newCheck.noFormDisplay(date))
-      // TODO: add function to create table and add checks
-
     })
     noFormTotalRow(json)
   })
@@ -80,8 +77,10 @@ function noFormTotalRow(json) {
   let text = document.createElement('TD')
   text.innerText = 'Total'
   let amountTotal = document.createElement('TD')
+  amountTotal.id = 'amount'
   amountTotal.innerHTML = `$${json.reduce(totalAmount, 0)}`
   let mileageTotal = document.createElement('TD')
+  mileageTotal.id = 'mileage'
   mileageTotal.innerHTML = json.reduce(totalMileage, 0)
   row.appendChild(blank)
   row.appendChild(blank2)
@@ -94,27 +93,3 @@ function noFormTotalRow(json) {
 function refreshTotals() {
   // TODO: add functionality to refresh tables total rows
 }
-
-
-// document.addEventListener('turbolinks:load', loadEmployers())
-
-
-
-
-
-  // var employers = document.querySelectorAll('.employer')
-  // for (let i=0; i < employers.length; i++) {
-  //   employers[i].addEventListener('click', (event) => {
-  //     fetch(`/employers/${event.target.id}/checks.json`)
-  //     .then(response => response.json())
-  //     .then(json => {
-  //       json.forEach( function(checkData) {
-  //         check = new Check(checkData)
-  //         let ul = document.getElementById(check.employer)
-  //         let li = document.createElement('LI')
-  //         ul.appendChild(li).innerHTML= `${check.name}-$${check.amount}`
-  //       })
-  //     })
-  //   })
-  // }
-// })

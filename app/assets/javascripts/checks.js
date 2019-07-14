@@ -75,17 +75,25 @@ function createAndDisplayCheck(event)  {
     $('#checkDate').text(`Date: ${date.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit' })}`)
     $('#checkAmount').text(`Amount: ${check['amount']}`)
     $('#checkMileage').text(`Mileage: ${check['mileage']}`)
-    debugger
     $('#checkEmployer').text(`Employer: ${check['employer']}`)
     $('#checkDescription').text(`Description: ${check['description']}`)
     if (data['employer']['tax_form'] === true) {
       table = document.querySelector(`#table-${data['employer']['id']}`)
       total = document.querySelector(`#total-${data['employer']['id']}`)
+      amount = document.querySelector(`#total-${data['employer']['id']} #amount`)
+      mileage = document.querySelector(`#total-${data['employer']['id']} #mileage`)
       table.insertBefore(check.rowDisplay(date), total)
+      amount.innerHTML = `$${parseInt(amount.innerText.slice(1)) + check.amount}`
+      debugger
+      mileage.innerHTML = parseInt(mileage.innerHTML) + check.mileage
     } else {
       table = document.querySelector(`#table-no-form`)
       total = document.querySelector(`#no-form-total`)
+      amount = document.querySelector(`#no-form-total #amount`)
+      mileage = document.querySelector(`#no-form-total #mileage`)
       table.insertBefore(check.noFormDisplay(date), total)
+      amount.innerHTML = `$${parseInt(amount.innerText.slice(1)) + check.amount}`
+      mileage.innerHTML = parseInt(mileage.innerHTML) + mileage.amount
     }
   })
 }
@@ -143,7 +151,6 @@ function loadCheckResults() {
   let answer= fetch(`/tax_years/${id}/checks/${event.target.id}.json`)
   .then(response => response.json())
   .then(json => {
-    debugger
     check = new Check(json)
     $('#checkName').text(`Name: ${check['name']}`)
     let date = new Date(check['check_date'])

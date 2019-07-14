@@ -42,15 +42,6 @@ class Employer {
     }
     newTable.appendChild(this.totalsRow())
     newEm.appendChild(b)
-
-    // TODO: impliment listChecks into this method
-    // newEm.appendChild(b)
-    // employers.appendChild(newEm)
-    // newEm.addEventListener('click', function(event) {
-    //   if (!document.querySelector(`#table-${event.target.id}`) || !document.querySelector(`#${event.target.id}`) ) {
-    //     listChecks(event)
-    //   }
-    // })
   }
 
   totalsRow() {
@@ -60,8 +51,10 @@ class Employer {
     let text = document.createElement('TD')
     text.innerText = 'Total'
     let amountTotal = document.createElement('TD')
+    amountTotal.id = 'amount'
     amountTotal.innerHTML = `$${this.checks.reduce(totalAmount, 0)}`
     let mileageTotal = document.createElement('TD')
+    mileageTotal.id = 'mileage'
     mileageTotal.innerHTML = this.checks.reduce(totalMileage, 0)
     row.appendChild(blank)
     row.appendChild(text)
@@ -100,7 +93,6 @@ function listChecks(event) {
       let date = new Date(check['check_date'])
       newTable.appendChild(newCheck.rowDisplay(date))
     })
-
   })
   let lastBreak= document.createElement('br')
   event.target.appendChild(lastBreak)
