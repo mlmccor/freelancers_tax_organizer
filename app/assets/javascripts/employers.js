@@ -14,10 +14,14 @@ class Employer {
     let employers = document.querySelector('#employers')
     let newEm = document.createElement('div')
     let b = document.createElement('br')
-    newEm.id = this.id
+    newEm.id = `employer-${this.id}`
     let emName= document.createElement('h4')
     emName.innerText = this.name
     newEm.appendChild(emName)
+    let oldEm = document.getElementById(`employer-${this.id}`)
+    if (oldEm) {
+      oldEm.remove()
+    }
     employers.appendChild(newEm)
     let firstBreak = document.createElement('br')
     newEm.appendChild(firstBreak)
@@ -34,6 +38,9 @@ class Employer {
     amountHeader.innerText = 'Amount'
     let mileageHeader = headers.insertCell(3)
     mileageHeader.innerText = 'Mileage'
+    headers.querySelectorAll('td').forEach((cell) => {
+      cell.addEventListener('click', this.sortData)
+    })
     for (let i = 0;i<this.checks.length;i++) {
       var newTable = document.querySelector(`#table-${this.id}`)
       let newCheck = new Check (this.checks[i])
@@ -61,6 +68,15 @@ class Employer {
     row.appendChild(amountTotal)
     row.appendChild(mileageTotal)
     return row
+  }
+
+  sortData = (event) => {
+    this.checks.sort((checkA, checkB) => {
+      let dateA = new Date(checkA.check_date)
+      let dateB = new Date(checkB.check_date)
+      return dateA - dateB
+    })
+    this.displayEmployer()
   }
 }
 

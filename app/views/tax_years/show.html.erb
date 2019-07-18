@@ -53,13 +53,13 @@
   document.addEventListener('turbolinks:load', displayFormEmployers())
   document.addEventListener('turbolinks:load', displayNoFormChecks())
 </script>
+
 <script type="text/javascript" charset="utf-8">
 $(function() {
   $(".newCheck").click(function(event) {
     event.preventDefault()
     document.querySelector('#checkResult').style.display= "none"
     document.querySelector('.newForm').style.display= "inline"
-    let id = $('.id').data('temp')
   })
 })
 </script>

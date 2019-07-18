@@ -22,7 +22,6 @@ function displayFormEmployers() {
   .then(json => {
     json.forEach( function(emp){
       let employer = new Employer(emp)
-      // TODO: change next line to new function
       employer.displayEmployer()
     })
 

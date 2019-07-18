@@ -58,7 +58,6 @@ class Check {
   }
 
 
-
 }
 
 function createAndDisplayCheck(event)  {
@@ -78,18 +77,18 @@ function createAndDisplayCheck(event)  {
     $('#checkEmployer').text(`Employer: ${check['employer']}`)
     $('#checkDescription').text(`Description: ${check['description']}`)
     if (data['employer']['tax_form'] === true) {
-      table = document.querySelector(`#table-${data['employer']['id']}`)
-      total = document.querySelector(`#total-${data['employer']['id']}`)
-      amount = document.querySelector(`#total-${data['employer']['id']} #amount`)
-      mileage = document.querySelector(`#total-${data['employer']['id']} #mileage`)
+      const table = document.querySelector(`#table-${data['employer']['id']}`)
+      const total = document.querySelector(`#total-${data['employer']['id']}`)
+      const amount = document.querySelector(`#total-${data['employer']['id']} #amount`)
+      const mileage = document.querySelector(`#total-${data['employer']['id']} #mileage`)
       table.insertBefore(check.rowDisplay(date), total)
       amount.innerHTML = `$${parseInt(amount.innerText.slice(1)) + check.amount}`
       mileage.innerHTML = parseInt(mileage.innerHTML) + check.mileage
     } else {
-      table = document.querySelector(`#table-no-form`)
-      total = document.querySelector(`#no-form-totals`)
-      amount = document.querySelector(`#no-form-totals #amount`)
-      mileage = document.querySelector(`#no-form-totals #mileage`)
+      const table = document.querySelector(`#table-no-form`)
+      const total = document.querySelector(`#no-form-totals`)
+      const amount = document.querySelector(`#no-form-totals #amount`)
+      const mileage = document.querySelector(`#no-form-totals #mileage`)
       table.insertBefore(check.noFormDisplay(date), total)
       amount.innerHTML = `$${parseInt(amount.innerText.slice(1)) + check.amount}`
       mileage.innerHTML = parseInt(mileage.innerHTML) + check.mileage
