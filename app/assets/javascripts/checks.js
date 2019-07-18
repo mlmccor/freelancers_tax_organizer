@@ -84,16 +84,15 @@ function createAndDisplayCheck(event)  {
       mileage = document.querySelector(`#total-${data['employer']['id']} #mileage`)
       table.insertBefore(check.rowDisplay(date), total)
       amount.innerHTML = `$${parseInt(amount.innerText.slice(1)) + check.amount}`
-      debugger
       mileage.innerHTML = parseInt(mileage.innerHTML) + check.mileage
     } else {
       table = document.querySelector(`#table-no-form`)
-      total = document.querySelector(`#no-form-total`)
-      amount = document.querySelector(`#no-form-total #amount`)
-      mileage = document.querySelector(`#no-form-total #mileage`)
+      total = document.querySelector(`#no-form-totals`)
+      amount = document.querySelector(`#no-form-totals #amount`)
+      mileage = document.querySelector(`#no-form-totals #mileage`)
       table.insertBefore(check.noFormDisplay(date), total)
       amount.innerHTML = `$${parseInt(amount.innerText.slice(1)) + check.amount}`
-      mileage.innerHTML = parseInt(mileage.innerHTML) + mileage.amount
+      mileage.innerHTML = parseInt(mileage.innerHTML) + check.mileage
     }
   })
 }
