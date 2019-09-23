@@ -11,12 +11,13 @@ class Employer {
   }
 
   displayEmployer() {
+    let tax_year_id = document.querySelector('.id').dataset.temp
     let employers = document.querySelector('#employers')
     let newEm = document.createElement('div')
     let b = document.createElement('br')
     newEm.id = `employer-${this.id}`
     let emName= document.createElement('h4')
-    emName.innerText = this.name
+    emName.innerHTML = `<a href= "/tax_years/${tax_year_id}/employers/${this.id}/edit">${this.name}</a>`
     newEm.appendChild(emName)
     let oldEm = document.getElementById(`employer-${this.id}`)
     if (oldEm) {

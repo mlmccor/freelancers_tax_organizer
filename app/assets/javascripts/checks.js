@@ -7,7 +7,7 @@ class Check {
     this.mileage = attributes['mileage']
     this.description = attributes['description']
     if (attributes['employer']) {
-      this.employer = attributes['employer']['name']
+      this.employer = attributes['employer']
     }
   }
 
@@ -44,7 +44,7 @@ class Check {
     let name = document.createElement('TD')
     name.innerHTML = `<a href="#" onclick= "loadCheckResults(); return false" class='check' id=${this.id}>${this.name}</a>`
     let employer = document.createElement('TD')
-    employer.innerHTML = `<a href="#" id= employer->${this.employer}</a>`
+    employer.innerHTML = `<a href="/employers/${this.employer.id}/edit" id= employer->${this.employer.name}</a>`
     let amount = document.createElement('TD')
     amount.innerHTML = `$${this.amount}`
     let mileage = document.createElement('TD')
@@ -74,7 +74,7 @@ function createAndDisplayCheck(event)  {
     $('#checkDate').text(`Date: ${date.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit' })}`)
     $('#checkAmount').text(`Amount: ${check['amount']}`)
     $('#checkMileage').text(`Mileage: ${check['mileage']}`)
-    $('#checkEmployer').text(`Employer: ${check['employer']}`)
+    $('#checkEmployer').text(`Employer: ${check['employer']['name']}`)
     $('#checkDescription').text(`Description: ${check['description']}`)
     if (data['employer']['tax_form'] === true) {
       const table = document.querySelector(`#table-${data['employer']['id']}`)
@@ -105,12 +105,13 @@ function displayCheck(event) {
   .then(response => response.json())
   .then(json => {
     check = new Check(json)
+    debugger
     $('#checkName').text(`Name: ${check['name']}`)
     let date = new Date(check['check_date'])
     $('#checkDate').text(`Date: ${date.toDateString()}`)
     $('#checkAmount').text(`Amount: $${check['amount']}`)
     $('#checkMileage').text(`Mileage: ${check['mileage']}`)
-    $('#checkEmployer').text(`Employer: ${check['employer']}`)
+    $('#checkEmployer').text(`Employer: ${check.employer.name}`)
     $('#checkDescription').text(`Description: ${check['description']}`)
     let edit = document.querySelector('#checkEditLink')
     edit.innerHTML = `<a href="/checks/${check.id}/edit">Edit Check</a>`
@@ -155,7 +156,7 @@ function loadCheckResults() {
     $('#checkDate').text(`Date: ${date.toDateString()}`)
     $('#checkAmount').text(`Amount: $${check['amount']}`)
     $('#checkMileage').text(`Mileage: ${check['mileage']}`)
-    $('#checkEmployer').text(`Employer: ${check['employer']}`)
+    $('#checkEmployer').text(`Employer: ${check['employer']['name']}`)
     $('#checkDescription').text(`Description: ${check['description']}`)
     let edit = document.querySelector('#checkEditLink')
     edit.innerHTML = `<a href="/checks/${check.id}/edit">Edit Check</a>`
