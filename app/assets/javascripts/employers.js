@@ -39,9 +39,9 @@ class Employer {
     amountHeader.innerText = 'Amount'
     let mileageHeader = headers.insertCell(3)
     mileageHeader.innerText = 'Mileage'
-    headers.querySelectorAll('td').forEach((cell) => {
-      cell.addEventListener('click', this.sortData)
-    })
+    // headers.querySelectorAll('td').forEach((cell) => {
+    //   cell.addEventListener('click', this.sortData)
+    // })
     for (let i = 0;i<this.checks.length;i++) {
       var newTable = document.querySelector(`#table-${this.id}`)
       let newCheck = new Check (this.checks[i])
