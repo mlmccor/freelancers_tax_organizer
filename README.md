@@ -19,6 +19,10 @@ Used PostGresql for Production database
 
 This app is deployed on Heroku <a href="freelancers-tax-organizer.herokuapp.com">here</a>
 
+# Video Demo
+
+Here is a walkthrough <a href="https://youtu.be/_rox-raMgDQ">video</a> of the app.
+
 # Installation
 
 After cloning the repo to your local device, run the following commands in the root folder:
