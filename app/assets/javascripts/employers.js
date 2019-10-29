@@ -17,7 +17,7 @@ class Employer {
     let b = document.createElement('br')
     newEm.id = `employer-${this.id}`
     let emName= document.createElement('h4')
-    emName.innerHTML = `<a href= "/tax_years/${tax_year_id}/employers/${this.id}/edit">${this.name}</a>`
+    emName.innerHTML = `<a href= "/tax_years/${tax_year_id}/employers/${this.id}">${this.name}</a>`
     newEm.appendChild(emName)
     let oldEm = document.getElementById(`employer-${this.id}`)
     if (oldEm) {
