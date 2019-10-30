@@ -1,24 +1,41 @@
-# README
+# Freelance Tax Organizer
+The Freelance Tax Organizer is a Rails application that organizes all freelance income data into tables to make it easier to either give to a tax professional for filing or to self-file.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Frameworks used
 
-Things you may want to cover:
+Front and back ends used the Ruby on Rails framework, with accompanying Javascript on some pages
 
-* Ruby version
+Ruby Gems used:
 
-* System dependencies
+* omniauth
+* bcrypt
+* jquery-rails
+* active_model_serializers
+* bootstrap
 
-* Configuration
+Used PostGresql for Production database
 
-* Database creation
+# Live Site
 
-* Database initialization
+This app is deployed on Heroku <a href="freelancers-tax-organizer.herokuapp.com">here</a>
 
-* How to run the test suite
+# Video Demo
 
-* Services (job queues, cache servers, search engines, etc.)
+Here is a walkthrough <a href="https://youtu.be/_rox-raMgDQ">video</a> of the app.
 
-* Deployment instructions
+# Installation
 
-* ...
+After cloning the repo to your local device, run the following commands in the root folder:
+
+bundle install
+rake db:migrate
+
+To run the app:
+
+rails s
+
+then travel to localhost:3000 (depending on what port you set it to) in a browser window
+
+# License
+
+MIT © mlmccor
