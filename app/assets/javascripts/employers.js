@@ -71,7 +71,7 @@ class Employer {
     return row
   }
 
-  sortData = (event) => {
+  sortData(event) {
     this.checks.sort((checkA, checkB) => {
       let dateA = new Date(checkA.check_date)
       let dateB = new Date(checkB.check_date)
